@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import Sidebar from '../sidebar/Sidebar';
-import { GrLogout } from 'react-icons/gr';
 import { getDashboardLeaves } from '../../getdata/getdata';
 import Pagination from '../pagination/Pagination';
 import RecentLeave from '../../assets/Recentleave.png';
@@ -16,8 +14,6 @@ const Dashboard = () => {
     const [todayleavelist, setTodayLeavelist] = useState([]);
     const [laterleavelist, setLaterLeavelist] = useState([]);
     const [leavestatuslist, setLeaveStatuslist] = useState([]);
-    const [searchLeave, setSearchLeave] = useState('');
-    const navigate = useNavigate();
 
     const [currentPage, setCurrentPage] = useState(1);
     const [recordsPerPage] = useState(10);
@@ -46,25 +42,11 @@ const Dashboard = () => {
     }, []);
 
 
-    const handleLogout = () => {
-        localStorage.removeItem('token');
-        alert('Logging out');
-        navigate('/');
-    }
+    
     return (
         <>
             <Sidebar />
             <div className="content">
-                <div className="row mt-4 mb-4">
-                    <div className="col-xs-6 col-sm-6 col-md-10 col-lg-11">
-                        <input className="w-100 ps-3 search-input" type="text" name="Search" placeholder='Search Leave Details...'
-                            onChange={(e) => setSearchLeave(e.target.value)} />
-
-                    </div>
-                    <div className="col-xs-6 col-sm-6 col-md-2 col-lg-1">
-                        <GrLogout className="shopping-bag" style={{ width: 50, height: 40, cursor: 'pointer' }} onClick={handleLogout} />
-                    </div>
-                </div>
                 <div className="card">
                     <div className="card-body">
                         <h3>Leave Details</h3>
@@ -78,17 +60,13 @@ const Dashboard = () => {
                                         setLeaveStatus(false);
                                     }} >
                                     <div className="card-body">
-                                        {/* <div className='d-inline'>
-                                        <div className="d-flex justify-content-start fs-4 fw-bold text-secondary">Recent Leaves</div>
-                                        <div className="d-flex justify-content-end fs-1 fw-bold text-secondary">0{todayleavelist.length}</div>
-                                        </div> */}
                                         <div className="d-flex">
                                             <div className="p-2 w-100 fs-4 fw-bold text-secondary">Recent Leaves</div>
                                             <div className="p-2 fs-1 fw-bold text-secondary flex-shrink-1">0{todayleavelist.length}</div>
                                         </div>
                                         <div className="d-flex">
                                             <div className="p-2 w-100"><img src={RecentLeave} alt='RecentLeave' /></div>
-                                            <div className="p-2 fs-6 fw-bold flex-shrink-1">People on Leave Today</div>
+                                            <div className="p-2 fs-6 fw-bold flex-shrink-1">People on leave Today</div>
                                         </div>
 
                                        
@@ -106,14 +84,18 @@ const Dashboard = () => {
                                             <div className="p-2 w-100 fs-4 fw-bold text-secondary">Upcoming Leaves</div>
                                             <div className="p-2 fs-1 fw-bold text-secondary flex-shrink-2">0{laterleavelist.length}</div>
                                         </div>
-                                        <div className="row">
-                                            <div className="col-lg-3">
+                                        <div className="d-flex">
+                                            <div className="p-2 w-100"><img src={Upcomingleave} alt='Upcomingleave' /></div>
+                                            <div className="p-2 fs-6 fw-bold flex-shrink-1">People on leave Upcoming 7 days</div>
+                                        </div>
+                                        {/* <div className="row">
+                                            <div className="col-lg-6">
                                                 <img src={Upcomingleave} alt='Upcomingleave' />
                                             </div>
-                                            <div className="col-lg-9">
+                                            <div className="col-lg-6">
                                                 <p className="fs-6 fw-bold">People on Leave Upcoming (7 Days)</p>
                                             </div>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
                             </div>
@@ -145,36 +127,34 @@ const Dashboard = () => {
                                         <tr>
                                             {/* <th scope="col">S.No</th> */}
                                             <th scope="col">Employee Name</th>
-                                            <th scope="col">|</th>
+                                            <th className='vertical-row-color' scope="col">|</th>
                                             <th scope="col">Leave Type</th>
-                                            <th scope="col">|</th>
+                                            <th className='vertical-row-color' scope="col">|</th>
                                             <th scope="col">From Date</th>
-                                            <th scope="col">|</th>
+                                            <th className='vertical-row-color' scope="col">|</th>
                                             <th scope="col">To Date</th>
-                                            <th scope="col">|</th>
+                                            <th className='vertical-row-color' scope="col">|</th>
                                             <th scope="col">Status</th>
-                                            <th scope="col">|</th>
+                                            <th className='vertical-row-color' scope="col">|</th>
                                             <th scope="col">Reason</th>
                                         </tr>
                                     </thead>
                                     {todayleave ? (
                                         <tbody>
-                                            {todayRecords.filter((val) => {
-                                                return val.employeeName.toLowerCase().includes(searchLeave.toLowerCase())
-                                            }).map((item) => {
+                                            {todayRecords.map((item) => {
                                                 return (
                                                     <tr>
                                                         {/* <td>1</td> */}
                                                         <td>{item.employeeName}</td>
-                                                        <td>|</td>
+                                                        <td style={{color: 'lightgray'}}>|</td>
                                                         <td>{item.leaveType}</td>
-                                                        <td>|</td>
+                                                        <td style={{color: 'lightgray'}}>|</td>
                                                         <td>{item.fromDate.substring(0, 10)}</td>
-                                                        <td>|</td>
+                                                        <td style={{color: 'lightgray'}}>|</td>
                                                         <td>{item.toDate.substring(0, 10)}</td>
-                                                        <td>|</td>
+                                                        <td style={{color: 'lightgray'}}>|</td>
                                                         <td>{item.status}</td>
-                                                        <td>|</td>
+                                                        <td style={{color: 'lightgray'}}>|</td>
                                                         <td>{item.reason}</td>
                                                     </tr>
                                                 )
@@ -187,22 +167,20 @@ const Dashboard = () => {
 
                                     {laterleave ? (
                                         <tbody>
-                                            {upcomingRecords.filter((val) => {
-                                                return val.employeeName.toLowerCase().includes(searchLeave.toLowerCase())
-                                            }).map((item) => {
+                                            {upcomingRecords.map((item) => {
                                                 return (
                                                     <tr>
                                                         {/* <td>1</td> */}
                                                         <td>{item.employeeName}</td>
-                                                        <td>|</td>
+                                                        <td style={{color: 'lightgray'}}>|</td>
                                                         <td>{item.leaveType}</td>
-                                                        <td>|</td>
+                                                        <td style={{color: 'lightgray'}}>|</td>
                                                         <td>{item.fromDate.substring(0, 10)}</td>
-                                                        <td>|</td>
+                                                        <td style={{color: 'lightgray'}}>|</td>
                                                         <td>{item.toDate.substring(0, 10)}</td>
-                                                        <td>|</td>
+                                                        <td style={{color: 'lightgray'}}>|</td>
                                                         <td>{item.status}</td>
-                                                        <td>|</td>
+                                                        <td style={{color: 'lightgray'}}>|</td>
                                                         <td>{item.reason}</td>
                                                     </tr>
                                                 )
@@ -213,22 +191,20 @@ const Dashboard = () => {
 
                                     {leavestatus ? (
                                         <tbody>
-                                            {pendingRecords.filter((val) => {
-                                                return val.employeeName.toLowerCase().includes(searchLeave.toLowerCase())
-                                            }).map((item) => {
+                                            {pendingRecords.map((item) => {
                                                 return (
                                                     <tr>
                                                         {/* <td>1</td> */}
                                                         <td>{item.employeeName}</td>
-                                                        <td>|</td>
+                                                        <td style={{color: 'lightgray'}}>|</td>
                                                         <td>{item.leaveType}</td>
-                                                        <td>|</td>
+                                                        <td style={{color: 'lightgray'}}>|</td>
                                                         <td>{item.fromDate.substring(0, 10)}</td>
-                                                        <td>|</td>
+                                                        <td style={{color: 'lightgray'}}>|</td>
                                                         <td>{item.toDate.substring(0, 10)}</td>
-                                                        <td>|</td>
+                                                        <td style={{color: 'lightgray'}}>|</td>
                                                         <td>{item.status}</td>
-                                                        <td>|</td>
+                                                        <td style={{color: 'lightgray'}}>|</td>
                                                         <td>{item.reason}</td>
                                                     </tr>
                                                 )

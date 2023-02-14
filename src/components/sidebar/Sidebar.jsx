@@ -1,13 +1,22 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { GrLogout } from 'react-icons/gr';
 import HeaderLogo from '../../assets/HeaderLogo.png';
 import '../../styles/dashboard.css';
 
 const Sidebar = () => {
     const [showManage, setShowManage] = useState(true);
+    const navigate = useNavigate();
 
     const handleManage = () => {
         setShowManage(!showManage)    
+    }
+
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        alert('Logging out');
+        navigate('/');
     }
 
     return (
@@ -25,7 +34,7 @@ const Sidebar = () => {
                     >All Leaves</NavLink>
                 </>
             ) : null}
-            
+            <GrLogout className="shopping-bag" style={{ marginLeft: 10, width: 50, height: 40, cursor: 'pointer' }} onClick={handleLogout} />
 
         </div>
 

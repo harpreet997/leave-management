@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import Sidebar from '../sidebar/Sidebar';
 import { Modal } from "react-bootstrap";
 import { FaEdit } from 'react-icons/fa';
+import {AiFillDelete} from 'react-icons/ai';
 import EditLeave from './EditLeave';
 import Pagination from '../pagination/Pagination';
 import { getAllLeaves } from '../../getdata/getdata';
+import { deleteLeave } from '../../postdata/postdata';
 import '../../styles/dashboard.css';
 
 const AllLeaves = () => {
@@ -46,6 +48,18 @@ const AllLeaves = () => {
     };
 
 
+    const DeleteLeaves = (id) => {
+        deleteLeave(id)
+        .then((response) => {
+            alert(response.data.message);
+            window.location.reload(false);
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+    }
+
+
     const handleClose = () => setEditStatus(false);
     return (
         <>
@@ -72,14 +86,19 @@ const AllLeaves = () => {
                             <table className="table table-striped">
                                 <thead>
                                     <tr>
-                                        {/* <th scope="col">S.No</th> */}
                                         <th scope="col">Employee Name</th>
+                                        <th className='vertical-row-color' scope="col">|</th>
                                         <th scope="col">Leave Type</th>
+                                        <th className='vertical-row-color' scope="col">|</th>
                                         <th scope="col">From Date</th>
+                                        <th className='vertical-row-color' scope="col">|</th>
                                         <th scope="col">To Date</th>
+                                        <th className='vertical-row-color' scope="col">|</th>
                                         <th scope="col">Status</th>
+                                        <th className='vertical-row-color' scope="col">|</th>
                                         <th scope="col">Reason</th>
-                                        <th scope="col">Edit Status</th>
+                                        <th className='vertical-row-color' scope="col">|</th>
+                                        <th scope="col">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -88,15 +107,24 @@ const AllLeaves = () => {
                                             <tr key={i}>
                                                 {/* <td>{i + 1}</td> */}
                                                 <td>{item.employeeName}</td>
+                                                <td style={{color: 'lightgray'}}>|</td>
                                                 <td>{item.leaveType}</td>
+                                                <td style={{color: 'lightgray'}}>|</td>
                                                 <td>{item.fromDate.substring(0, 10)}</td>
+                                                <td style={{color: 'lightgray'}}>|</td>
                                                 <td>{item.toDate.substring(0, 10)}</td>
+                                                <td style={{color: 'lightgray'}}>|</td>
                                                 <td>{item.status}</td>
+                                                <td style={{color: 'lightgray'}}>|</td>
                                                 <td>{item.reason}</td>
-                                                <td><FaEdit style={{ marginLeft: 20, width: 50, height: 30, cursor: 'pointer' }}
+                                                <td style={{color: 'lightgray'}}>|</td>
+                                                <td><FaEdit style={{ width: 50, height: 30, cursor: 'pointer' }}
                                                     onClick={() => {
                                                         handleEditStatus(item._id);
-                                                    }} /></td>
+                                                    }} /><span className='vertical-row-color'>|</span> <AiFillDelete style={{ width: 50, height: 30, cursor: 'pointer' }} 
+                                                    onClick={() => {
+                                                        DeleteLeaves(item._id);
+                                                    }}/></td>
                                                 <Modal show={editstatus === item._id ? true : false} onHide={handleClose}>
                                                     <EditLeave leavelist={item} />
                                                 </Modal>

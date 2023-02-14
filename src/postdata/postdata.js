@@ -12,3 +12,7 @@ export const applyLeave = (leavedata) => {
 export const editLeave = (id,editleavedata) => {
     return axios.patch(`${baseUrl}/api/v1/leave/${id}`, editleavedata)
 } 
+
+export const deleteLeave = (id) => {
+    return axios.delete(`${baseUrl}/api/v1/leave/${id}`)
+} 
