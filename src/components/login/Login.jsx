@@ -25,10 +25,13 @@ const Login = () => {
     event.preventDefault();
     login(logindata)
       .then((response) => {
-        if (response.data.token) {
-          localStorage.setItem("token", response.data.token);
+        if (response.data.data.role === "Admin") {
           alert(response.data.message);
           navigate('/dashboard');
+        }
+        else{
+          alert(response.data.message);
+          navigate('/userDashboard');
         }
       })
       .catch((error) => {

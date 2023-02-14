@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import Sidebar from '../sidebar/Sidebar';
+import UserSidebar from '../userSidebar/UserSidebar';
 import { getDashboardLeaves } from '../../getdata/getdata';
 import Pagination from '../pagination/Pagination';
 import RecentLeave from '../../assets/Recentleave.png';
 import Upcomingleave from '../../assets/Upcomingleave.png';
 import Pendingleave from '../../assets/Pendingleave.png';
+import NoRecord from '../../assets/NoRecord.png';
 import '../../styles/dashboard.css';
 
-const Dashboard = () => {
+const UserDashboard = () => {
     const [todayleave, setTodayLeave] = useState(true);
     const [laterleave, setLaterLeave] = useState(false);
     const [leavestatus, setLeaveStatus] = useState(false);
@@ -45,7 +46,7 @@ const Dashboard = () => {
     
     return (
         <>
-            <Sidebar />
+            <UserSidebar />
             <div className="content">
                 <div className="card">
                     <div className="card-body">
@@ -152,7 +153,7 @@ const Dashboard = () => {
 
 
                                         </tbody>
-
+                                        
                                     ) : null}
 
                                     {laterleave ? (
@@ -229,4 +230,4 @@ const Dashboard = () => {
     );
 }
 
-export default Dashboard;
+export default UserDashboard;
