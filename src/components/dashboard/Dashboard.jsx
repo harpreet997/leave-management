@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Sidebar from '../sidebar/Sidebar';
-import '../../styles/dashboard.css';
 import { GrLogout } from 'react-icons/gr';
-import axios from 'axios';
+import { getDashboardLeaves } from '../../getdata/getdata';
 import Pagination from '../pagination/Pagination';
+import '../../styles/dashboard.css';
 
 const Dashboard = () => {
     const [todayleave, setTodayLeave] = useState(true);
@@ -30,7 +30,7 @@ const Dashboard = () => {
 
 
     useEffect(() => {
-        axios.post('https://db66-2401-4900-1c19-5e6d-e173-3e63-35f5-4011.in.ngrok.io/api/v1/leave/dashboard/list')
+        getDashboardLeaves()
             .then((response) => {
                 setTodayLeavelist(response.data.dataForToday);
                 setLaterLeavelist(response.data.dataForWeek);
@@ -88,7 +88,7 @@ const Dashboard = () => {
                                 </div>
                             </div>
                             <div className="col-md-4">
-                                <div className='card' style={laterleave ? { backgroundColor: "lightcoral", cursor: 'pointer' } : { cursor: 'pointer' }} onClick={() => {
+                                <div className='card' style={laterleave ? { backgroundColor: "lightgreen", cursor: 'pointer' } : { cursor: 'pointer' }} onClick={() => {
                                     setLaterLeave(true);
                                     setTodayLeave(false);
                                     setLeaveStatus(false);
@@ -108,7 +108,7 @@ const Dashboard = () => {
                                 </div>
                             </div>
                             <div className="col-md-4">
-                                <div className='card' style={leavestatus ? { backgroundColor: "lightblue", cursor: 'pointer' } : { cursor: 'pointer' }} onClick={() => {
+                                <div className='card' style={leavestatus ? { backgroundColor: "lightgreen", cursor: 'pointer' } : { cursor: 'pointer' }} onClick={() => {
                                     setLeaveStatus(true);
                                     setLaterLeave(false);
                                     setTodayLeave(false);

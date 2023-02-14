@@ -40,12 +40,12 @@ const Login = () => {
   return (
     <div className="container-fluid" style={{ backgroundColor: 'purple', height: '100%' }}>
       <div className="App" >
-        <div className='row'>
+        <div className='row' style={{paddingTop: 200}}>
           <div className='col-lg-5'>
             <img src={LoginLogo} className='login-logo' alt="loginLogo" />
           </div>
-          <div className='col-lg-1 d-flex vertical-row'>
-            <div className="vr"></div>
+          <div className='col-lg-1 d-flex vertical-row vertical-line'>
+            <div className="vr vertical-line"></div>
           </div>
           <div className='col-lg-6'>
             <form onSubmit={handleLogin}>

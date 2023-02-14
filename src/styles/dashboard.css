@@ -83,6 +83,13 @@
     }
   }
   
+  @media screen and (min-width: 400px) {
+    .img-width {
+      width: 210px;
+      height: 150px;
+    }
+  }
+
   @media screen and (min-width: 700px) {
     .img-width {
       width: 210px;

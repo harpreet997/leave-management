@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
-import axios from "axios";
+import { editLeave } from "../../postdata/postdata";
 
 const EditLeave = ({ leavelist }) => {
     const [editleavedata, setEditLeavedata] = useState({
@@ -26,7 +26,7 @@ const EditLeave = ({ leavelist }) => {
 
     const UpdateStatus = (event) => {
         event.preventDefault();
-        axios.patch(`https://db66-2401-4900-1c19-5e6d-e173-3e63-35f5-4011.in.ngrok.io/api/v1/leave/${editleavedata._id}`, editleavedata)
+        editLeave(editleavedata._id, editleavedata)
             .then((response) => {
                 alert(response.data.message);
                 window.location.reload(false);
@@ -36,15 +36,12 @@ const EditLeave = ({ leavelist }) => {
             })
     }
     return (
-
         <>
-
             <Modal.Header closeButton>
                 <Modal.Title className="text-white" style={{ paddingLeft: 160 }}>Edit Leave Status</Modal.Title>
             </Modal.Header>
             <form onSubmit={UpdateStatus}>
                 <Modal.Body>
-
                     <div className="mb-3">
                         <p className="text-start">Employee Name</p>
                         <input type="email" className="form-control w-100" id="employeeName" name="employeeName"

@@ -1,39 +1,38 @@
 import React, { useState } from 'react';
 import Sidebar from '../sidebar/Sidebar';
+import { applyLeave } from '../../postdata/postdata';
 import '../../styles/dashboard.css';
-import axios from 'axios';
 
 const ApplyLeave = () => {
-
     const [leavedata, setLeavedata] = useState({
         employeeName: "",
-        reason:"",
-        leaveType:"",
-        fromDate:"",
-        toDate:""
+        reason: "",
+        leaveType: "",
+        fromDate: "",
+        toDate: ""
     });
 
 
     const handleChange = (event) => {
         setLeavedata({
-          ...leavedata,
-          [event.target.name]: event.target.value
+            ...leavedata,
+            [event.target.name]: event.target.value
         })
-      }
+    }
 
 
-      const  AddLeave = (event) => {
+    const AddLeave = (event) => {
         event.preventDefault();
-        axios.post('https://db66-2401-4900-1c19-5e6d-e173-3e63-35f5-4011.in.ngrok.io/api/v1/leave/add', leavedata)
-          .then((response) => {
-              alert(response.data.message);
-              window.location.reload(false);
+        applyLeave(leavedata)
+            .then((response) => {
+                alert(response.data.message);
+                window.location.reload(false);
             }
-          )
-          .catch((error) => {
-            alert(error.response.data.message);
-          })
-      }
+            )
+            .catch((error) => {
+                alert(error.response.data.message);
+            })
+    }
 
     return (
         <>
@@ -49,12 +48,12 @@ const ApplyLeave = () => {
                                     onChange={handleChange} required />
                             </div>
                             <div className="mb-3">
-                            <p className="text-start">Leave Type</p>
-                            <select className="form-select w-50" name="leaveType" aria-label="Default select example" onChange={handleChange} required>
-                                <option value="">Select Leave Type</option>
-                                <option value="SL">Sick Leave</option>
-                                <option value="CL">Casual Leave</option>
-                            </select>
+                                <p className="text-start">Leave Type</p>
+                                <select className="form-select w-50" name="leaveType" aria-label="Default select example" onChange={handleChange} required>
+                                    <option value="">Select Leave Type</option>
+                                    <option value="SL">Sick Leave</option>
+                                    <option value="CL">Casual Leave</option>
+                                </select>
                             </div>
                             <div className="mb-3">
                                 <p className="text-start">From Date</p>
