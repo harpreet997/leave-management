@@ -27,3 +27,14 @@
         height: 0px;
     }
 }
+
+@media screen and (max-width: 700px) {
+    .align-items{
+       margin-left: 100px;
+    }
+}
+
+
+.text-color{
+    color: white;
+}

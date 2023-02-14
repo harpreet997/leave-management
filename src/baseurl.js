@@ -1,1 +1,1 @@
-export const baseUrl = 'https://2869-2401-4900-1c19-5e6d-14d1-9678-b571-641d.in.ngrok.io'
+export const baseUrl = 'https://leavemanagement-nu.vercel.app'

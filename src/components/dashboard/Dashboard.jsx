@@ -4,6 +4,9 @@ import Sidebar from '../sidebar/Sidebar';
 import { GrLogout } from 'react-icons/gr';
 import { getDashboardLeaves } from '../../getdata/getdata';
 import Pagination from '../pagination/Pagination';
+import RecentLeave from '../../assets/Recentleave.png';
+import Upcomingleave from '../../assets/Upcomingleave.png';
+import Pendingleave from '../../assets/Pendingleave.png';
 import '../../styles/dashboard.css';
 
 const Dashboard = () => {
@@ -75,15 +78,20 @@ const Dashboard = () => {
                                         setLeaveStatus(false);
                                     }} >
                                     <div className="card-body">
-                                        <p className="fw-bold text-secondary">Recent Leaves</p>
-                                        <div className="row">
-                                            <div className="col-lg-6">
-
-                                            </div>
-                                            <div className="col-lg-6">
-                                                <p className="fs-4 fw-bold">People On Leave Today</p>
-                                            </div>
+                                        {/* <div className='d-inline'>
+                                        <div className="d-flex justify-content-start fs-4 fw-bold text-secondary">Recent Leaves</div>
+                                        <div className="d-flex justify-content-end fs-1 fw-bold text-secondary">0{todayleavelist.length}</div>
+                                        </div> */}
+                                        <div className="d-flex">
+                                            <div className="p-2 w-100 fs-4 fw-bold text-secondary">Recent Leaves</div>
+                                            <div className="p-2 fs-1 fw-bold text-secondary flex-shrink-1">0{todayleavelist.length}</div>
                                         </div>
+                                        <div className="d-flex">
+                                            <div className="p-2 w-100"><img src={RecentLeave} alt='RecentLeave' /></div>
+                                            <div className="p-2 fs-6 fw-bold flex-shrink-1">People on Leave Today</div>
+                                        </div>
+
+                                       
                                     </div>
                                 </div>
                             </div>
@@ -94,14 +102,16 @@ const Dashboard = () => {
                                     setLeaveStatus(false);
                                 }}>
                                     <div className="card-body">
-                                        <p className="fw-bold text-secondary">Upcoming Leaves</p>
+                                        <div className="d-flex">
+                                            <div className="p-2 w-100 fs-4 fw-bold text-secondary">Upcoming Leaves</div>
+                                            <div className="p-2 fs-1 fw-bold text-secondary flex-shrink-2">0{laterleavelist.length}</div>
+                                        </div>
                                         <div className="row">
                                             <div className="col-lg-3">
-                                                {/* <img src={IncomeLogo} alt="OrderLogo" style={{ width: 100, height: 80 }} /> */}
+                                                <img src={Upcomingleave} alt='Upcomingleave' />
                                             </div>
                                             <div className="col-lg-9">
-                                                <p className="fs-4 fw-bold">People On Leave Upcoming (7 Days)</p>
-
+                                                <p className="fs-6 fw-bold">People on Leave Upcoming (7 Days)</p>
                                             </div>
                                         </div>
                                     </div>
@@ -114,20 +124,20 @@ const Dashboard = () => {
                                     setTodayLeave(false);
                                 }}>
                                     <div className="card-body">
-                                        <p className="fw-bold text-secondary">Leaves Status</p>
-                                        <div className="row">
-                                            <div className="col-lg-6">
-                                                {/* <img src={ExpenseLogo} alt="OrderLogo" style={{ width: 100, height: 80 }} /> */}
-                                            </div>
-                                            <div className="col-lg-6">
-                                                <p className="fs-4 fw-bold">Leaves Not Approved</p>
-                                            </div>
+
+                                        <div className="d-flex">
+                                            <div className="p-2 w-100 fs-4 fw-bold text-secondary">Leaves Status</div>
+                                            <div className="p-2 fs-1 fw-bold text-secondary flex-shrink-1">0{leavestatuslist.length}</div>
+                                        </div>
+                                        <div className="d-flex">
+                                            <div className="p-2 w-100"><img src={Pendingleave} alt='Pendingleave' /></div>
+                                            <div className="p-2 fs-6 fw-bold flex-shrink-1">Leaves Not Approved</div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            {todayleave ? <p className="mt-3 fs-5 fw-bold">People On Leave Today</p> : null}
-                            {laterleave ? <p className="mt-3 fs-5 fw-bold">People On Leave Upcoming (7 Days)</p> : null}
+                            {todayleave ? <p className="mt-3 fs-5 fw-bold">People on Leave Today</p> : null}
+                            {laterleave ? <p className="mt-3 fs-5 fw-bold">People on Leave Upcoming (7 Days)</p> : null}
                             {leavestatus ? <p className="mt-3 fs-5 fw-bold">Leaves Not Approved</p> : null}
                             <div className='scroll'>
                                 <table className="table table-striped">
@@ -135,10 +145,15 @@ const Dashboard = () => {
                                         <tr>
                                             {/* <th scope="col">S.No</th> */}
                                             <th scope="col">Employee Name</th>
+                                            <th scope="col">|</th>
                                             <th scope="col">Leave Type</th>
+                                            <th scope="col">|</th>
                                             <th scope="col">From Date</th>
+                                            <th scope="col">|</th>
                                             <th scope="col">To Date</th>
+                                            <th scope="col">|</th>
                                             <th scope="col">Status</th>
+                                            <th scope="col">|</th>
                                             <th scope="col">Reason</th>
                                         </tr>
                                     </thead>
@@ -151,10 +166,15 @@ const Dashboard = () => {
                                                     <tr>
                                                         {/* <td>1</td> */}
                                                         <td>{item.employeeName}</td>
+                                                        <td>|</td>
                                                         <td>{item.leaveType}</td>
+                                                        <td>|</td>
                                                         <td>{item.fromDate.substring(0, 10)}</td>
+                                                        <td>|</td>
                                                         <td>{item.toDate.substring(0, 10)}</td>
+                                                        <td>|</td>
                                                         <td>{item.status}</td>
+                                                        <td>|</td>
                                                         <td>{item.reason}</td>
                                                     </tr>
                                                 )
@@ -174,10 +194,15 @@ const Dashboard = () => {
                                                     <tr>
                                                         {/* <td>1</td> */}
                                                         <td>{item.employeeName}</td>
+                                                        <td>|</td>
                                                         <td>{item.leaveType}</td>
+                                                        <td>|</td>
                                                         <td>{item.fromDate.substring(0, 10)}</td>
+                                                        <td>|</td>
                                                         <td>{item.toDate.substring(0, 10)}</td>
+                                                        <td>|</td>
                                                         <td>{item.status}</td>
+                                                        <td>|</td>
                                                         <td>{item.reason}</td>
                                                     </tr>
                                                 )
@@ -195,10 +220,15 @@ const Dashboard = () => {
                                                     <tr>
                                                         {/* <td>1</td> */}
                                                         <td>{item.employeeName}</td>
+                                                        <td>|</td>
                                                         <td>{item.leaveType}</td>
+                                                        <td>|</td>
                                                         <td>{item.fromDate.substring(0, 10)}</td>
+                                                        <td>|</td>
                                                         <td>{item.toDate.substring(0, 10)}</td>
+                                                        <td>|</td>
                                                         <td>{item.status}</td>
+                                                        <td>|</td>
                                                         <td>{item.reason}</td>
                                                     </tr>
                                                 )

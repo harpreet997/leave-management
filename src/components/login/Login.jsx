@@ -47,16 +47,16 @@ const Login = () => {
           <div className='col-lg-1 d-flex vertical-row vertical-line'>
             <div className="vr vertical-line"></div>
           </div>
-          <div className='col-lg-6'>
+          <div className='col-lg-6 align-items'>
             <form onSubmit={handleLogin}>
-              <p className='text-start fs-3'>Login</p>
+              <p className='text-start fs-3 text-color'>Login</p>
               <div className="mb-3">
-                <p className="text-start">Email Address</p>
+                <p className="text-start text-color">Email Address</p>
                 <input type="email" className="form-control w-50" id="email" name="email" placeholder="Enter your Email" onChange={handleChange}
                   required />
               </div>
               <div className="mb-3">
-                <p className="text-start">Password</p>
+                <p className="text-start text-color">Password</p>
                 <input type="password" className="form-control w-50" id="password" name="password" placeholder="Enter your Password" onChange={handleChange}
                   required />
               </div>
