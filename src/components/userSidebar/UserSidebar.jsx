@@ -19,8 +19,9 @@ const UserSidebar = () => {
             <NavLink className="fs-6 fw-bold" to="/userDashboard"
             >Dashboard</NavLink>
             <div className='d-flex'>
-            <GrLogout className="shopping-bag" style={{  marginTop: 12, marginLeft: 10, width: 50, height: 40, cursor: 'pointer' }} onClick={handleLogout} />
-            <p className='fs-6 fw-bold mt-4' style={{ cursor: 'pointer' }} onClick={handleLogout}>Logout</p>
+            <p className='fs-6 fw-bold mt-4' style={{ marginLeft: 15, marginTop: 8, cursor: 'pointer' }} onClick={handleLogout}>Logout</p>
+            <GrLogout className="shopping-bag" style={{  marginTop: 25, marginLeft: 5, width: 20, height: 20, cursor: 'pointer' }} onClick={handleLogout} />
+            
             </div>
             
 

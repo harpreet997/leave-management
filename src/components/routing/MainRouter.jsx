@@ -6,14 +6,19 @@ import AllLeaves from '../leave/AllLeaves';
 import UserDashboard from '../userDashboard/UserDashboard';
 
 const MainRouter = () => {
+
+    const token = localStorage.getItem('token')
+
+    console.log(token)
+    
     return (
         <Routes>
             <Route path="/" element={<Login />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/userDashboard" element={<UserDashboard />} />
-            <Route path="/leave" element={<Dashboard />} />
-            <Route path="/apply-leave" element={<ApplyLeave/>} />
-            <Route path="/all-leaves" element={<AllLeaves/>} />
+            <Route path="/dashboard" element={ token === null ? <Login /> : <Dashboard />} />
+            <Route path="/userDashboard" element={token === null ? <Login /> : <UserDashboard />} />
+            <Route path="/leave" element={token === null ? <Login /> : <Dashboard />} />
+            <Route path="/apply-leave" element={token === null ? <Login /> : <ApplyLeave/>} />
+            <Route path="/all-leaves" element={token === null ? <Login /> : <AllLeaves/>} />
         </Routes>
     )
 }

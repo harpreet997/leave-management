@@ -29,11 +29,13 @@ const Login = () => {
           localStorage.setItem('token', response.data.token)
           alert(response.data.message);
           navigate('/dashboard');
+          window.location.reload(false);
         }
         else{
           localStorage.setItem('token', response.data.token)
           alert(response.data.message);
           navigate('/userDashboard');
+          window.location.reload(false);
         }
       })
       .catch((error) => {

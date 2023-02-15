@@ -35,8 +35,9 @@ const Sidebar = () => {
                 </>
             ) : null}
             <div className='d-flex'>
-            <GrLogout className="shopping-bag" style={{  marginLeft: 10, width: 50, height: 40, cursor: 'pointer' }} onClick={handleLogout} />
-            <p className='fs-6 fw-bold' style={{ marginTop: 8,cursor: 'pointer' }} onClick={handleLogout}>Logout</p>
+            <p className='fs-6 fw-bold' style={{ marginLeft: 15, marginTop: 8,cursor: 'pointer' }} onClick={handleLogout}>Logout</p>
+            <GrLogout className="shopping-bag" style={{  marginTop: 10, marginLeft: 5, width: 20, height: 20, cursor: 'pointer' }} onClick={handleLogout} />
+            
             </div>
             
 

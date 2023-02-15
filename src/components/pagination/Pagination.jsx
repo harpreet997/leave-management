@@ -1,5 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import {IoIosArrowBack} from 'react-icons/io';
+import {IoIosArrowForward} from 'react-icons/io';
 
 const Pagination = ({ nPages, currentPage, setCurrentPage }) => {
 
@@ -19,7 +21,7 @@ const Pagination = ({ nPages, currentPage, setCurrentPage }) => {
                 <li className="page-item">
                     <Link className="page-link" 
                         onClick={prevPage}>                       
-                        Previous
+                        <IoIosArrowBack/>
                     </Link>
                 </li>
                 {pageNumbers.map(pgNumber => (
@@ -35,7 +37,7 @@ const Pagination = ({ nPages, currentPage, setCurrentPage }) => {
                 <li className="page-item">
                     <Link className="page-link" 
                         onClick={nextPage}>                        
-                        Next
+                        <IoIosArrowForward/>
                     </Link>
                 </li>
             </ul>

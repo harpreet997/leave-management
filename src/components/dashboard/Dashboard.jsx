@@ -5,6 +5,7 @@ import Pagination from '../pagination/Pagination';
 import RecentLeave from '../../assets/Recentleave.png';
 import Upcomingleave from '../../assets/Upcomingleave.png';
 import Pendingleave from '../../assets/Pendingleave.png';
+import NoRecord from '../../assets/NoRecord.png';
 import '../../styles/dashboard.css';
 
 const Dashboard = () => {
@@ -114,6 +115,7 @@ const Dashboard = () => {
                             {laterleave ? <p className="mt-3 fs-5 fw-bold">People on Leave Upcoming 7 days</p> : null}
                             {leavestatus ? <p className="mt-3 fs-5 fw-bold">Leaves Not Approved</p> : null} */}
                             <div className='scroll'>
+                                
                                 <table className="table table-striped">
                                     <thead>                                       
                                         <tr>
@@ -204,6 +206,7 @@ const Dashboard = () => {
 
 
                                 </table>
+                                
                                 {todayleave ? <Pagination
                                     nPages={todayPages}
                                     currentPage={currentPage}
