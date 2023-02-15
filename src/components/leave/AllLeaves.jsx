@@ -7,15 +7,13 @@ import EditLeave from './EditLeave';
 import Pagination from '../pagination/Pagination';
 import { getAllLeaves } from '../../getdata/getdata';
 import { deleteLeave } from '../../postdata/postdata';
+import NoRecord from '../../assets/NoRecord.png';
 import '../../styles/dashboard.css';
 
 const AllLeaves = () => {
     const [editstatus, setEditStatus] = useState(false);
     const [leavelist, setLeaveList] = useState([]);
-    const [status, setStatus] = useState();
-
-    const [message, setMessage] = useState(true);
-
+    const [status, setStatus] = useState('All');
     const filterdata = leavelist.filter(item => {
         if (status === 'All') {
             return item;
@@ -72,9 +70,9 @@ const AllLeaves = () => {
                             <select className="ms-4  w-20" name="status"
                                 onChange={(event) => {
                                     setStatus(event.target.value);
-                                    setMessage(false);
+                                    
                                 }} >
-                                <option value="0">Select Status</option>
+                                {/* <option value="0">Select Status</option> */}
                                 <option value="All">All</option>
                                 <option value="Pending">Pending</option>
                                 <option value="Approved">Approved</option>
@@ -101,12 +99,14 @@ const AllLeaves = () => {
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
+                                {currentRecords.length > 0 ? 
+                                (
                                 <tbody>
                                     {currentRecords.map((item, i) => {
                                         return (
                                             <tr key={i}>
                                                 {/* <td>{i + 1}</td> */}
-                                                <td>{item.employeeName}</td>
+                                                <td style={{textTransform: "capitalize"}}>{item.employeeName}</td>
                                                 <td style={{color: 'lightgray'}}>|</td>
                                                 <td>{item.leaveType}</td>
                                                 <td style={{color: 'lightgray'}}>|</td>
@@ -132,7 +132,8 @@ const AllLeaves = () => {
                                         )
                                     })}
                                 </tbody>
-                                {message || status === '0' ? <p className='fs-5 fw-bold'>Note : Please select the status to view the records.</p> : null}
+                                ): <img src={NoRecord} alt='NoRecord' className='mt-4 w-100' style={{marginLeft: 250, marginRight: 250}}/>}
+                                
                             </table>
                             <Pagination
                                 nPages={nPages}

@@ -26,10 +26,12 @@ const Login = () => {
     login(logindata)
       .then((response) => {
         if (response.data.data.role === "Admin") {
+          localStorage.setItem('token', response.data.token)
           alert(response.data.message);
           navigate('/dashboard');
         }
         else{
+          localStorage.setItem('token', response.data.token)
           alert(response.data.message);
           navigate('/userDashboard');
         }

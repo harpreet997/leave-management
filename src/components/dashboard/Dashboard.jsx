@@ -42,7 +42,7 @@ const Dashboard = () => {
     }, []);
 
 
-    
+
     return (
         <>
             <Sidebar />
@@ -61,7 +61,7 @@ const Dashboard = () => {
                                     }} >
                                     <div className="card-body">
                                         <div className="d-flex">
-                                            <div className="p-2 w-100 fs-4 fw-bold text-secondary">Recent Leaves</div>
+                                            <div className="p-2 w-100 fs-4 fw-bold text-secondary">Current Leaves</div>
                                             <div className="p-2 fs-1 fw-bold text-secondary flex-shrink-1">0{todayleavelist.length}</div>
                                         </div>
                                         <div className="d-flex">
@@ -69,7 +69,7 @@ const Dashboard = () => {
                                             <div className="p-2 fs-6 fw-bold flex-shrink-1">People on leave Today</div>
                                         </div>
 
-                                       
+
                                     </div>
                                 </div>
                             </div>
@@ -100,7 +100,7 @@ const Dashboard = () => {
                                     <div className="card-body">
 
                                         <div className="d-flex">
-                                            <div className="p-2 w-100 fs-4 fw-bold text-secondary">Leaves Status</div>
+                                            <div className="p-2 w-100 fs-4 fw-bold text-secondary">Take Action</div>
                                             <div className="p-2 fs-1 fw-bold text-secondary flex-shrink-1">0{leavestatuslist.length}</div>
                                         </div>
                                         <div className="d-flex">
@@ -110,41 +110,41 @@ const Dashboard = () => {
                                     </div>
                                 </div>
                             </div>
-                            {todayleave ? <p className="mt-3 fs-5 fw-bold">People on Leave Today</p> : null}
-                            {laterleave ? <p className="mt-3 fs-5 fw-bold">People on Leave Upcoming (7 Days)</p> : null}
-                            {leavestatus ? <p className="mt-3 fs-5 fw-bold">Leaves Not Approved</p> : null}
+                            {/* {todayleave ? <p className="mt-3 fs-5 fw-bold">People on Leave Today</p> : null}
+                            {laterleave ? <p className="mt-3 fs-5 fw-bold">People on Leave Upcoming 7 days</p> : null}
+                            {leavestatus ? <p className="mt-3 fs-5 fw-bold">Leaves Not Approved</p> : null} */}
                             <div className='scroll'>
                                 <table className="table table-striped">
-                                    <thead>
+                                    <thead>                                       
                                         <tr>
-                                            <th scope="col">Employee Name</th>
-                                            <th className='vertical-row-color' scope="col">|</th>
-                                            <th scope="col">Leave Type</th>
-                                            <th className='vertical-row-color' scope="col">|</th>
-                                            <th scope="col">From Date</th>
-                                            <th className='vertical-row-color' scope="col">|</th>
-                                            <th scope="col">To Date</th>
-                                            <th className='vertical-row-color' scope="col">|</th>
-                                            <th scope="col">Status</th>
-                                            <th className='vertical-row-color' scope="col">|</th>
-                                            <th scope="col">Reason</th>
-                                        </tr>
+                                        <th scope="col">Employee Name</th>
+                                        <th className='vertical-row-color' scope="col">|</th>
+                                        <th scope="col">Leave Type</th>
+                                        <th className='vertical-row-color' scope="col">|</th>
+                                        <th scope="col">From Date</th>
+                                        <th className='vertical-row-color' scope="col">|</th>
+                                        <th scope="col">To Date</th>
+                                        <th className='vertical-row-color' scope="col">|</th>
+                                        <th scope="col">Status</th>
+                                        <th className='vertical-row-color' scope="col">|</th>
+                                        <th scope="col">Reason</th>
+                                    </tr>
                                     </thead>
                                     {todayleave ? (
                                         <tbody>
                                             {todayRecords.map((item) => {
                                                 return (
                                                     <tr>
-                                                        <td>{item.employeeName}</td>
-                                                        <td style={{color: 'lightgray'}}>|</td>
+                                                        <td style={{ textTransform: "capitalize" }}>{item.employeeName}</td>
+                                                        <td style={{ color: 'lightgray' }}>|</td>
                                                         <td>{item.leaveType}</td>
-                                                        <td style={{color: 'lightgray'}}>|</td>
+                                                        <td style={{ color: 'lightgray' }}>|</td>
                                                         <td>{item.fromDate.substring(0, 10)}</td>
-                                                        <td style={{color: 'lightgray'}}>|</td>
+                                                        <td style={{ color: 'lightgray' }}>|</td>
                                                         <td>{item.toDate.substring(0, 10)}</td>
-                                                        <td style={{color: 'lightgray'}}>|</td>
+                                                        <td style={{ color: 'lightgray' }}>|</td>
                                                         <td>{item.status}</td>
-                                                        <td style={{color: 'lightgray'}}>|</td>
+                                                        <td style={{ color: 'lightgray' }}>|</td>
                                                         <td>{item.reason}</td>
                                                     </tr>
                                                 )
@@ -160,17 +160,17 @@ const Dashboard = () => {
                                             {upcomingRecords.map((item) => {
                                                 return (
                                                     <tr>
-                                                        
-                                                        <td>{item.employeeName}</td>
-                                                        <td style={{color: 'lightgray'}}>|</td>
+
+                                                        <td style={{ textTransform: "capitalize" }}>{item.employeeName}</td>
+                                                        <td style={{ color: 'lightgray' }}>|</td>
                                                         <td>{item.leaveType}</td>
-                                                        <td style={{color: 'lightgray'}}>|</td>
+                                                        <td style={{ color: 'lightgray' }}>|</td>
                                                         <td>{item.fromDate.substring(0, 10)}</td>
-                                                        <td style={{color: 'lightgray'}}>|</td>
+                                                        <td style={{ color: 'lightgray' }}>|</td>
                                                         <td>{item.toDate.substring(0, 10)}</td>
-                                                        <td style={{color: 'lightgray'}}>|</td>
+                                                        <td style={{ color: 'lightgray' }}>|</td>
                                                         <td>{item.status}</td>
-                                                        <td style={{color: 'lightgray'}}>|</td>
+                                                        <td style={{ color: 'lightgray' }}>|</td>
                                                         <td>{item.reason}</td>
                                                     </tr>
                                                 )
@@ -184,17 +184,17 @@ const Dashboard = () => {
                                             {pendingRecords.map((item) => {
                                                 return (
                                                     <tr>
-                                                        
-                                                        <td>{item.employeeName}</td>
-                                                        <td style={{color: 'lightgray'}}>|</td>
+
+                                                        <td style={{ textTransform: "capitalize" }}>{item.employeeName}</td>
+                                                        <td style={{ color: 'lightgray' }}>|</td>
                                                         <td>{item.leaveType}</td>
-                                                        <td style={{color: 'lightgray'}}>|</td>
+                                                        <td style={{ color: 'lightgray' }}>|</td>
                                                         <td>{item.fromDate.substring(0, 10)}</td>
-                                                        <td style={{color: 'lightgray'}}>|</td>
+                                                        <td style={{ color: 'lightgray' }}>|</td>
                                                         <td>{item.toDate.substring(0, 10)}</td>
-                                                        <td style={{color: 'lightgray'}}>|</td>
+                                                        <td style={{ color: 'lightgray' }}>|</td>
                                                         <td>{item.status}</td>
-                                                        <td style={{color: 'lightgray'}}>|</td>
+                                                        <td style={{ color: 'lightgray' }}>|</td>
                                                         <td>{item.reason}</td>
                                                     </tr>
                                                 )
