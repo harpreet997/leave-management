@@ -134,7 +134,11 @@ const AllLeaves = () => {
                                             })}
                                         </tbody>
                                     </table>
-                                ) : <img src={NoRecord} alt='NoRecord' className='mt-4 w-50' style={{ marginLeft: 250, marginRight: 250 }} />}
+                                ) : 
+                                <div className='text-center'>
+                                <img src={NoRecord} alt='NoRecord' className='mt-4 w-10'/>
+                                </div>
+                                }
 
 
                             {currentRecords.length > 0 ?

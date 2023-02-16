@@ -111,26 +111,24 @@ const Dashboard = () => {
                                     </div>
                                 </div>
                             </div>
-                            {/* {todayleave ? <p className="mt-3 fs-5 fw-bold">People on Leave Today</p> : null}
-                            {laterleave ? <p className="mt-3 fs-5 fw-bold">People on Leave Upcoming 7 days</p> : null}
-                            {leavestatus ? <p className="mt-3 fs-5 fw-bold">Leaves Not Approved</p> : null} */}
+
                             <div className='scroll'>
-                                
+
                                 <table className="table table-striped">
-                                    <thead>                                       
+                                    <thead>
                                         <tr>
-                                        <th scope="col">Employee Name</th>
-                                        <th className='vertical-row-color' scope="col">|</th>
-                                        <th scope="col">Leave Type</th>
-                                        <th className='vertical-row-color' scope="col">|</th>
-                                        <th scope="col">From Date</th>
-                                        <th className='vertical-row-color' scope="col">|</th>
-                                        <th scope="col">To Date</th>
-                                        <th className='vertical-row-color' scope="col">|</th>
-                                        <th scope="col">Status</th>
-                                        <th className='vertical-row-color' scope="col">|</th>
-                                        <th scope="col">Reason</th>
-                                    </tr>
+                                            <th scope="col">Employee Name</th>
+                                            <th className='vertical-row-color' scope="col">|</th>
+                                            <th scope="col">Leave Type</th>
+                                            <th className='vertical-row-color' scope="col">|</th>
+                                            <th scope="col">From Date</th>
+                                            <th className='vertical-row-color' scope="col">|</th>
+                                            <th scope="col">To Date</th>
+                                            <th className='vertical-row-color' scope="col">|</th>
+                                            <th scope="col">Status</th>
+                                            <th className='vertical-row-color' scope="col">|</th>
+                                            <th scope="col">Reason</th>
+                                        </tr>
                                     </thead>
                                     {todayleave ? (
                                         <tbody>
@@ -203,25 +201,69 @@ const Dashboard = () => {
                                             })}
                                         </tbody>
                                     ) : null}
-
-
                                 </table>
-                                
-                                {todayleave ? <Pagination
-                                    nPages={todayPages}
-                                    currentPage={currentPage}
-                                    setCurrentPage={setCurrentPage}
-                                /> : null}
-                                {laterleave ? <Pagination
-                                    nPages={upcomingPages}
-                                    currentPage={currentPage}
-                                    setCurrentPage={setCurrentPage}
-                                /> : null}
-                                {leavestatus ? <Pagination
-                                    nPages={pendingPages}
-                                    currentPage={currentPage}
-                                    setCurrentPage={setCurrentPage}
-                                /> : null}
+
+                                {todayleave && todayRecords.length === 0 ?
+                                    <div className='text-center'>
+                                        <img src={NoRecord} alt='NoRecord' className='w-10' />
+                                    </div>
+                                    : null}
+                                {laterleave && upcomingRecords.length === 0 ?
+                                    <div className='text-center'>
+                                        <img src={NoRecord} alt='NoRecord' className='w-10' />
+                                    </div>
+                                    : null}
+                                {leavestatus && pendingRecords.length === 0 ?
+                                    <div className='text-center'>
+                                        <img src={NoRecord} alt='NoRecord' className='w-10' />
+                                    </div>
+                                    : null}
+
+                                {todayleave && todayRecords.length > 0 ?
+                                    <div className='d-flex'>
+                                        <div className="p-2 w-100 fs-6 fw-bold text-secondary">
+                                            Displaying {currentPage} to {todayRecords.length}  of {recordsPerPage} records
+                                        </div>
+                                        <div className="p-2 flex-shrink-1">
+                                            <Pagination
+                                                nPages={todayPages}
+                                                currentPage={currentPage}
+                                                setCurrentPage={setCurrentPage}
+                                            /></div>
+
+                                    </div>
+                                    : null}
+
+                                {laterleave && upcomingRecords.length > 0 ?
+                                    <div className='d-flex'>
+                                        <div className="p-2 w-100 fs-6 fw-bold text-secondary">
+                                            Displaying {currentPage} to {upcomingRecords.length}  of {recordsPerPage} records
+                                        </div>
+                                        <div className="p-2 flex-shrink-1">
+                                            <Pagination
+                                                nPages={upcomingPages}
+                                                currentPage={currentPage}
+                                                setCurrentPage={setCurrentPage}
+                                            /></div>
+
+                                    </div>
+                                    : null}
+
+                                {leavestatus && pendingRecords.length > 0 ?
+                                    <div className='d-flex'>
+                                        <div className="p-2 w-100 fs-6 fw-bold text-secondary">
+                                            Displaying {currentPage} to {pendingRecords.length}  of {recordsPerPage} records
+                                        </div>
+                                        <div className="p-2 flex-shrink-1">
+                                            <Pagination
+                                                nPages={pendingPages}
+                                                currentPage={currentPage}
+                                                setCurrentPage={setCurrentPage}
+                                            /></div>
+
+                                    </div>
+                                    : null}
+
 
                             </div>
                         </div>
