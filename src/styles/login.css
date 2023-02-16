@@ -32,6 +32,9 @@
     .align-items{
        margin-left: 100px;
     }
+    .form-input-width{
+        width: 100% !important;
+    }
 }
 
 

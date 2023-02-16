@@ -44,12 +44,12 @@ const ApplyLeave = () => {
                         <form onSubmit={AddLeave}>
                             <div className="mb-3">
                                 <p className="text-start">Employee Name</p>
-                                <input type="text" className="form-control w-50" id="employeeName" name="employeeName" placeholder="Enter Employee Name"
+                                <input type="text" className="form-input-width form-control w-50" id="employeeName" name="employeeName" placeholder="Enter Employee Name"
                                     onChange={handleChange} required />
                             </div>
                             <div className="mb-3">
                                 <p className="text-start">Leave Type</p>
-                                <select className="form-select w-50" name="leaveType" aria-label="Default select example" onChange={handleChange} required>
+                                <select className="form-input-width form-select w-50" name="leaveType" aria-label="Default select example" onChange={handleChange} required>
                                     <option value="">Select Leave Type</option>
                                     <option value="SL">Sick Leave</option>
                                     <option value="CL">Casual Leave</option>
@@ -57,13 +57,13 @@ const ApplyLeave = () => {
                             </div>
                             <div className="mb-3">
                                 <p className="text-start">From Date</p>
-                                <input type="date" className="form-control w-50" id="fromDate" name="fromDate"
+                                <input type="date" className="form-input-width form-control w-50" id="fromDate" name="fromDate"
                                     onChange={handleChange} required />
                             </div>
 
                             <div className="mb-3">
                                 <p className="text-start">To Date</p>
-                                <input type="date" className="form-control w-50" id="toDate" name="toDate"
+                                <input type="date" className="form-input-width form-control w-50" id="toDate" name="toDate"
                                     onChange={handleChange} required />
                             </div>
                             <div className="mb-3">
