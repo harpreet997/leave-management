@@ -6,8 +6,19 @@
 
 @media screen and (max-width: 700px) {
   .App{
+    margin-top: 0px;
     text-align: center;
-    height: 700px;
+    height: 760px;
+    width: 380px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .App{
+    margin-top: 0px;
+    text-align: center;
+    height: 900px;
+    width: 280px;
   }
 }
 

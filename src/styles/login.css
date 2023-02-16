@@ -35,6 +35,16 @@
 }
 
 
+@media screen and (max-width: 400px) {
+    .align-items{
+       margin-left: 50px;
+    }
+    .form-input-width{
+        width: 100% !important;
+    }
+}
+
+
 .text-color{
     color: white;
 }
