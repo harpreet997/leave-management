@@ -16,3 +16,15 @@ export const editLeave = (id,editleavedata) => {
 export const deleteLeave = (id) => {
     return axios.delete(`${baseUrl}/api/v1/leave/${id}`)
 } 
+
+export const addEmployee = (addemployee, headers) => {
+    return axios.post(`${baseUrl}/api/v1/employee/add`, addemployee, {headers})
+} 
+
+export const editEmployee = (id, editemployee, headers) => {
+    return axios.patch(`${baseUrl}/api/v1/employee/${id}`, editemployee, {headers})
+} 
+
+export const deleteEmployee = (id, headers) => {
+    return axios.delete(`${baseUrl}/api/v1/employee/${id}`, {headers})
+}

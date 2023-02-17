@@ -11,6 +11,10 @@ import NoRecord from '../../assets/NoRecord.png';
 import '../../styles/dashboard.css';
 
 const AllLeaves = () => {
+    const [allleave, setAllLeave] = useState(true);
+    const [pendingleave, setPendingLeave] = useState(false);
+    const [approvedleave, setApprovedLeave] = useState(false);
+    const [rejectedleave, setRejectedLeave] = useState(false);
     const [editstatus, setEditStatus] = useState(false);
     const [leavelist, setLeaveList] = useState([]);
     const [status, setStatus] = useState('All');
@@ -67,7 +71,7 @@ const AllLeaves = () => {
                     <div className="card-body">
                         <div className='d-flex'>
                             <h3>ALL Leaves</h3>
-                            <select className="ms-4  w-20" name="status"
+                            <select className="ms-4  w-30" name="status"
                                 onChange={(event) => {
                                     setStatus(event.target.value);
 
@@ -77,7 +81,74 @@ const AllLeaves = () => {
                                 <option value="Approved">Approved</option>
                                 <option value="Rejected">Rejected</option>
                             </select>
+
+
                         </div>
+                        {/* <div className='m-2'>
+                            <div className='row'>
+                                <div className='col-lg-3'>
+                                    <div className='card' style={allleave ? { backgroundColor: "lightgreen", cursor: 'pointer' } : { cursor: 'pointer' }}
+                                        onClick={() => {
+                                            setAllLeave(true);
+                                            setPendingLeave(false);
+                                            setApprovedLeave(false);
+                                            setRejectedLeave(false);
+                                        }}>
+                                        <div className='card-body'>
+                                            <p className='fs-4 fw-bold text-secondary'>All Leaves</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div className='col-lg-3'>
+                                    <div className='card'
+                                    style={pendingleave ? { backgroundColor: "lightgreen", cursor: 'pointer' } : { cursor: 'pointer' }}
+                                    onClick={() => {
+                                        setAllLeave(false);
+                                        setPendingLeave(true);
+                                        setApprovedLeave(false);
+                                        setRejectedLeave(false);
+                                    }}>
+                                        <div className='card-body'>
+                                            <p className='fs-4 fw-bold text-secondary'>Pending Leaves</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div className='col-lg-3'>
+                                    <div className='card'
+                                    style={approvedleave ? { backgroundColor: "lightgreen", cursor: 'pointer' } : { cursor: 'pointer' }}
+                                    onClick={() => {
+                                        setAllLeave(false);
+                                        setPendingLeave(false);
+                                        setApprovedLeave(true);
+                                        setRejectedLeave(false);
+                                    }}>
+                                        <div className='card-body'>
+                                            <p className='fs-4 fw-bold text-secondary'>Approved Leaves</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div className='col-lg-3'>
+                                    <div className='card'
+                                    style={rejectedleave ? { backgroundColor: "lightgreen", cursor: 'pointer' } : { cursor: 'pointer' }}
+                                    onClick={() => {
+                                        setAllLeave(false);
+                                        setPendingLeave(false);
+                                        setApprovedLeave(false);
+                                        setRejectedLeave(true);
+                                    }}>
+                                        <div className='card-body'>
+                                            <p className='fs-4 fw-bold text-secondary'>Rejected Leaves</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div> */}
+
 
                         <div className='scroll'>
                             {currentRecords.length > 0 ?
@@ -133,32 +204,32 @@ const AllLeaves = () => {
                                             })}
                                         </tbody>
                                     </table>
-                                ) : 
+                                ) :
                                 <div className='text-center'>
-                                <img src={NoRecord} alt='NoRecord' className='mt-4 w-10'/>
+                                    <img src={NoRecord} alt='NoRecord' className='mt-4 w-10' />
                                 </div>
-                                }
+                            }
 
 
-                            
+
                         </div>
                     </div>
                 </div>
                 {currentRecords.length > 0 ?
-                                (
-                                    <div className='d-flex'>
-                                        <div className="p-2 w-100 fs-6 fw-bold text-secondary">
-                                            Displaying {currentPage} to {currentRecords.length}  of {currentRecords.length} records
-                                        </div>
-                                        <div className="p-2 flex-shrink-1">
-                                            <Pagination
-                                                nPages={nPages}
-                                                currentPage={currentPage}
-                                                setCurrentPage={setCurrentPage}
-                                            /></div>
+                    (
+                        <div className='d-flex'>
+                            <div className="p-2 w-100 fs-6 fw-bold text-secondary">
+                                Displaying {currentPage} to {currentRecords.length}  of {currentRecords.length} records
+                            </div>
+                            <div className="p-2 flex-shrink-1">
+                                <Pagination
+                                    nPages={nPages}
+                                    currentPage={currentPage}
+                                    setCurrentPage={setCurrentPage}
+                                /></div>
 
-                                    </div>
-                                ) : null}
+                        </div>
+                    ) : null}
             </div>
         </>
     );

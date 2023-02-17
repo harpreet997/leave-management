@@ -53,6 +53,7 @@ const ApplyLeave = () => {
                                     <option value="">Select Leave Type</option>
                                     <option value="SL">Sick Leave</option>
                                     <option value="CL">Casual Leave</option>
+                                    <option value="Half Day">Half day Leave</option>
                                 </select>
                             </div>
                             <div className="mb-3">

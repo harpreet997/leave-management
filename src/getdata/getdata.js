@@ -8,3 +8,7 @@ export const getAllLeaves = () => {
 export const getDashboardLeaves = () => {
     return axios.post(`${baseUrl}/api/v1/leave/dashboard/list`)
 }
+
+export const getEmployees = (headers) => {
+    return axios.get(`${baseUrl}/api/v1/employee/list`, {headers})
+}
