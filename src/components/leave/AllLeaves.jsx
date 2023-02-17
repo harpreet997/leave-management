@@ -72,7 +72,6 @@ const AllLeaves = () => {
                                     setStatus(event.target.value);
 
                                 }} >
-                                {/* <option value="0">Select Status</option> */}
                                 <option value="All">All</option>
                                 <option value="Pending">Pending</option>
                                 <option value="Approved">Approved</option>
@@ -107,18 +106,18 @@ const AllLeaves = () => {
                                             {currentRecords.map((item, i) => {
                                                 return (
                                                     <tr key={i}>
-                                                        <td style={{ textTransform: "capitalize" }}>{item.employeeName}</td>
-                                                        <td style={{ color: 'lightgray' }}>|</td>
+                                                        <td className='text-capitalize'>{item.employeeName}</td>
+                                                        <td className='vertical-row-color'>|</td>
                                                         <td>{item.leaveType}</td>
-                                                        <td style={{ color: 'lightgray' }}>|</td>
+                                                        <td className='vertical-row-color'>|</td>
                                                         <td>{item.fromDate.substring(0, 10)}</td>
-                                                        <td style={{ color: 'lightgray' }}>|</td>
+                                                        <td className='vertical-row-color'>|</td>
                                                         <td>{item.toDate.substring(0, 10)}</td>
-                                                        <td style={{ color: 'lightgray' }}>|</td>
+                                                        <td className='vertical-row-color'>|</td>
                                                         <td>{item.status}</td>
-                                                        <td style={{ color: 'lightgray' }}>|</td>
+                                                        <td className='vertical-row-color'>|</td>
                                                         <td>{item.reason}</td>
-                                                        <td style={{ color: 'lightgray' }}>|</td>
+                                                        <td className='vertical-row-color'>|</td>
                                                         <td><FaEdit style={{ width: 50, height: 30, cursor: 'pointer' }}
                                                             onClick={() => {
                                                                 handleEditStatus(item._id);
@@ -141,11 +140,15 @@ const AllLeaves = () => {
                                 }
 
 
-                            {currentRecords.length > 0 ?
+                            
+                        </div>
+                    </div>
+                </div>
+                {currentRecords.length > 0 ?
                                 (
                                     <div className='d-flex'>
                                         <div className="p-2 w-100 fs-6 fw-bold text-secondary">
-                                            Displaying {currentPage} to {currentRecords.length}  of {recordsPerPage} records
+                                            Displaying {currentPage} to {currentRecords.length}  of {currentRecords.length} records
                                         </div>
                                         <div className="p-2 flex-shrink-1">
                                             <Pagination
@@ -156,9 +159,6 @@ const AllLeaves = () => {
 
                                     </div>
                                 ) : null}
-                        </div>
-                    </div>
-                </div>
             </div>
         </>
     );

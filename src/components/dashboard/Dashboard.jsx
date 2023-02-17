@@ -27,15 +27,12 @@ const Dashboard = () => {
     const upcomingPages = Math.ceil(laterleavelist.length / recordsPerPage);
     const pendingPages = Math.ceil(leavestatuslist.length / recordsPerPage);
 
-
-
     useEffect(() => {
         getDashboardLeaves()
             .then((response) => {
                 setTodayLeavelist(response.data.dataForToday);
                 setLaterLeavelist(response.data.dataForWeek);
                 setLeaveStatuslist(response.data.dataForPendingStaus);
-
             })
             .catch((error) => {
                 console.log(error);
@@ -69,8 +66,6 @@ const Dashboard = () => {
                                             <div className="p-2 w-100"><img src={RecentLeave} alt='RecentLeave' /></div>
                                             <div className="p-2 fs-6 fw-bold flex-shrink-1">People on leave Today</div>
                                         </div>
-
-
                                     </div>
                                 </div>
                             </div>
@@ -136,15 +131,15 @@ const Dashboard = () => {
                                                 return (
                                                     <tr>
                                                         <td style={{ textTransform: "capitalize" }}>{item.employeeName}</td>
-                                                        <td style={{ color: 'lightgray' }}>|</td>
+                                                        <td className='vertical-row-color'>|</td>
                                                         <td>{item.leaveType}</td>
-                                                        <td style={{ color: 'lightgray' }}>|</td>
+                                                        <td className='vertical-row-color'>|</td>
                                                         <td>{item.fromDate.substring(0, 10)}</td>
-                                                        <td style={{ color: 'lightgray' }}>|</td>
+                                                        <td className='vertical-row-color'>|</td>
                                                         <td>{item.toDate.substring(0, 10)}</td>
-                                                        <td style={{ color: 'lightgray' }}>|</td>
+                                                        <td className='vertical-row-color'>|</td>
                                                         <td>{item.status}</td>
-                                                        <td style={{ color: 'lightgray' }}>|</td>
+                                                        <td className='vertical-row-color'>|</td>
                                                         <td>{item.reason}</td>
                                                     </tr>
                                                 )
@@ -162,15 +157,15 @@ const Dashboard = () => {
                                                     <tr>
 
                                                         <td style={{ textTransform: "capitalize" }}>{item.employeeName}</td>
-                                                        <td style={{ color: 'lightgray' }}>|</td>
+                                                        <td className='vertical-row-color'>|</td>
                                                         <td>{item.leaveType}</td>
-                                                        <td style={{ color: 'lightgray' }}>|</td>
+                                                        <td className='vertical-row-color'>|</td>
                                                         <td>{item.fromDate.substring(0, 10)}</td>
-                                                        <td style={{ color: 'lightgray' }}>|</td>
+                                                        <td className='vertical-row-color'>|</td>
                                                         <td>{item.toDate.substring(0, 10)}</td>
-                                                        <td style={{ color: 'lightgray' }}>|</td>
+                                                        <td className='vertical-row-color'>|</td>
                                                         <td>{item.status}</td>
-                                                        <td style={{ color: 'lightgray' }}>|</td>
+                                                        <td className='vertical-row-color'>|</td>
                                                         <td>{item.reason}</td>
                                                     </tr>
                                                 )
@@ -184,17 +179,16 @@ const Dashboard = () => {
                                             {pendingRecords.map((item) => {
                                                 return (
                                                     <tr>
-
-                                                        <td style={{ textTransform: "capitalize" }}>{item.employeeName}</td>
-                                                        <td style={{ color: 'lightgray' }}>|</td>
+                                                        <td className='text-capitalize'>{item.employeeName}</td>
+                                                        <td className='vertical-row-color'>|</td>
                                                         <td>{item.leaveType}</td>
-                                                        <td style={{ color: 'lightgray' }}>|</td>
+                                                        <td className='vertical-row-color'>|</td>
                                                         <td>{item.fromDate.substring(0, 10)}</td>
-                                                        <td style={{ color: 'lightgray' }}>|</td>
+                                                        <td className='vertical-row-color'>|</td>
                                                         <td>{item.toDate.substring(0, 10)}</td>
-                                                        <td style={{ color: 'lightgray' }}>|</td>
+                                                        <td className='vertical-row-color'>|</td>
                                                         <td>{item.status}</td>
-                                                        <td style={{ color: 'lightgray' }}>|</td>
+                                                        <td className='vertical-row-color'>|</td>
                                                         <td>{item.reason}</td>
                                                     </tr>
                                                 )
@@ -218,57 +212,55 @@ const Dashboard = () => {
                                         <img src={NoRecord} alt='NoRecord' className='w-10' />
                                     </div>
                                     : null}
-
-                                {todayleave && todayRecords.length > 0 ?
-                                    <div className='d-flex'>
-                                        <div className="p-2 w-100 fs-6 fw-bold text-secondary">
-                                            Displaying {currentPage} to {todayRecords.length}  of {recordsPerPage} records
-                                        </div>
-                                        <div className="p-2 flex-shrink-1">
-                                            <Pagination
-                                                nPages={todayPages}
-                                                currentPage={currentPage}
-                                                setCurrentPage={setCurrentPage}
-                                            /></div>
-
-                                    </div>
-                                    : null}
-
-                                {laterleave && upcomingRecords.length > 0 ?
-                                    <div className='d-flex'>
-                                        <div className="p-2 w-100 fs-6 fw-bold text-secondary">
-                                            Displaying {currentPage} to {upcomingRecords.length}  of {recordsPerPage} records
-                                        </div>
-                                        <div className="p-2 flex-shrink-1">
-                                            <Pagination
-                                                nPages={upcomingPages}
-                                                currentPage={currentPage}
-                                                setCurrentPage={setCurrentPage}
-                                            /></div>
-
-                                    </div>
-                                    : null}
-
-                                {leavestatus && pendingRecords.length > 0 ?
-                                    <div className='d-flex'>
-                                        <div className="p-2 w-100 fs-6 fw-bold text-secondary">
-                                            Displaying {currentPage} to {pendingRecords.length}  of {recordsPerPage} records
-                                        </div>
-                                        <div className="p-2 flex-shrink-1">
-                                            <Pagination
-                                                nPages={pendingPages}
-                                                currentPage={currentPage}
-                                                setCurrentPage={setCurrentPage}
-                                            /></div>
-
-                                    </div>
-                                    : null}
-
-
                             </div>
                         </div>
                     </div>
                 </div>
+
+                {todayleave && todayRecords.length > 0 ?
+                    <div className='d-flex'>
+                        <div className="p-2 w-100 fs-6 fw-bold text-secondary">
+                            Displaying {currentPage} to {todayRecords.length}  of {todayRecords.length} records
+                        </div>
+                        <div className="p-2 flex-shrink-1">
+                            <Pagination
+                                nPages={todayPages}
+                                currentPage={currentPage}
+                                setCurrentPage={setCurrentPage}
+                            /></div>
+
+                    </div>
+                    : null}
+
+                {laterleave && upcomingRecords.length > 0 ?
+                    <div className='d-flex'>
+                        <div className="p-2 w-100 fs-6 fw-bold text-secondary">
+                            Displaying {currentPage} to {upcomingRecords.length}  of {upcomingRecords.length} records
+                        </div>
+                        <div className="p-2 flex-shrink-1">
+                            <Pagination
+                                nPages={upcomingPages}
+                                currentPage={currentPage}
+                                setCurrentPage={setCurrentPage}
+                            /></div>
+
+                    </div>
+                    : null}
+
+                {leavestatus && pendingRecords.length > 0 ?
+                    <div className='d-flex'>
+                        <div className="p-2 w-100 fs-6 fw-bold text-secondary">
+                            Displaying {currentPage} to {pendingRecords.length}  of {upcomingRecords.length} records
+                        </div>
+                        <div className="p-2 flex-shrink-1">
+                            <Pagination
+                                nPages={pendingPages}
+                                currentPage={currentPage}
+                                setCurrentPage={setCurrentPage}
+                            /></div>
+
+                    </div>
+                    : null}
             </div>
         </>
     );

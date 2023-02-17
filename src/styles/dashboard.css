@@ -163,7 +163,7 @@
   }
 
   .vertical-row-color{
-    color: lightgrey
+    color: lightgray !important;
   }
   
 
@@ -190,5 +190,8 @@
     }
   }
   
+  .text-capitalize{
+    text-transform: capitalize;
+  }
   
   
