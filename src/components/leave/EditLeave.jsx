@@ -39,7 +39,7 @@ const EditLeave = ({ leavelist }) => {
     return (
         <>
             <Modal.Header closeButton>
-                <Modal.Title className="text-white" style={{ paddingLeft: 160 }}>Edit Leave Status</Modal.Title>
+                <Modal.Title className="text-center">Edit Leave Status</Modal.Title>
             </Modal.Header>
             <form onSubmit={UpdateStatus}>
                 <Modal.Body>

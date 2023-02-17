@@ -25,12 +25,23 @@ const AllLeaves = () => {
         return item.status === status;
     })
 
+    const pendingleaves = leavelist.filter(item => item.status === 'Pending')
+    const approvedleaves = leavelist.filter(item => item.status === 'Approved')
+    const rejectedleaves = leavelist.filter(item => item.status === 'Rejected')
+
+
     const [currentPage, setCurrentPage] = useState(1);
     const [recordsPerPage] = useState(10);
     const indexOfLastRecord = currentPage * recordsPerPage;
     const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
     const currentRecords = filterdata.slice(indexOfFirstRecord, indexOfLastRecord);
-    const nPages = Math.ceil(filterdata.length / recordsPerPage);
+    const pendingRecords = pendingleaves.slice(indexOfFirstRecord, indexOfLastRecord);
+    const approvedRecords = approvedleaves.slice(indexOfFirstRecord, indexOfLastRecord);
+    const rejectedRecords = rejectedleaves.slice(indexOfFirstRecord, indexOfLastRecord);
+    const allPages = Math.ceil(filterdata.length / recordsPerPage);
+    const pendingPages = Math.ceil(pendingleaves.length / recordsPerPage);
+    const approvedPages = Math.ceil(approvedleaves.length / recordsPerPage);
+    const rejectedPages = Math.ceil(rejectedleaves.length / recordsPerPage);
 
     console.log(filterdata)
 
@@ -69,7 +80,7 @@ const AllLeaves = () => {
             <div className="content">
                 <div className="card">
                     <div className="card-body">
-                        <div className='d-flex'>
+                        {/* <div className='d-flex'>
                             <h3>ALL Leaves</h3>
                             <select className="ms-4  w-30" name="status"
                                 onChange={(event) => {
@@ -83,8 +94,8 @@ const AllLeaves = () => {
                             </select>
 
 
-                        </div>
-                        {/* <div className='m-2'>
+                        </div> */}
+                        <div className='m-2'>
                             <div className='row'>
                                 <div className='col-lg-3'>
                                     <div className='card' style={allleave ? { backgroundColor: "lightgreen", cursor: 'pointer' } : { cursor: 'pointer' }}
@@ -102,13 +113,13 @@ const AllLeaves = () => {
                                 </div>
                                 <div className='col-lg-3'>
                                     <div className='card'
-                                    style={pendingleave ? { backgroundColor: "lightgreen", cursor: 'pointer' } : { cursor: 'pointer' }}
-                                    onClick={() => {
-                                        setAllLeave(false);
-                                        setPendingLeave(true);
-                                        setApprovedLeave(false);
-                                        setRejectedLeave(false);
-                                    }}>
+                                        style={pendingleave ? { backgroundColor: "lightgreen", cursor: 'pointer' } : { cursor: 'pointer' }}
+                                        onClick={() => {
+                                            setAllLeave(false);
+                                            setPendingLeave(true);
+                                            setApprovedLeave(false);
+                                            setRejectedLeave(false);
+                                        }}>
                                         <div className='card-body'>
                                             <p className='fs-4 fw-bold text-secondary'>Pending Leaves</p>
                                         </div>
@@ -117,13 +128,13 @@ const AllLeaves = () => {
                                 </div>
                                 <div className='col-lg-3'>
                                     <div className='card'
-                                    style={approvedleave ? { backgroundColor: "lightgreen", cursor: 'pointer' } : { cursor: 'pointer' }}
-                                    onClick={() => {
-                                        setAllLeave(false);
-                                        setPendingLeave(false);
-                                        setApprovedLeave(true);
-                                        setRejectedLeave(false);
-                                    }}>
+                                        style={approvedleave ? { backgroundColor: "lightgreen", cursor: 'pointer' } : { cursor: 'pointer' }}
+                                        onClick={() => {
+                                            setAllLeave(false);
+                                            setPendingLeave(false);
+                                            setApprovedLeave(true);
+                                            setRejectedLeave(false);
+                                        }}>
                                         <div className='card-body'>
                                             <p className='fs-4 fw-bold text-secondary'>Approved Leaves</p>
                                         </div>
@@ -132,13 +143,13 @@ const AllLeaves = () => {
                                 </div>
                                 <div className='col-lg-3'>
                                     <div className='card'
-                                    style={rejectedleave ? { backgroundColor: "lightgreen", cursor: 'pointer' } : { cursor: 'pointer' }}
-                                    onClick={() => {
-                                        setAllLeave(false);
-                                        setPendingLeave(false);
-                                        setApprovedLeave(false);
-                                        setRejectedLeave(true);
-                                    }}>
+                                        style={rejectedleave ? { backgroundColor: "lightgreen", cursor: 'pointer' } : { cursor: 'pointer' }}
+                                        onClick={() => {
+                                            setAllLeave(false);
+                                            setPendingLeave(false);
+                                            setApprovedLeave(false);
+                                            setRejectedLeave(true);
+                                        }}>
                                         <div className='card-body'>
                                             <p className='fs-4 fw-bold text-secondary'>Rejected Leaves</p>
                                         </div>
@@ -147,75 +158,189 @@ const AllLeaves = () => {
                                 </div>
 
                             </div>
-                        </div> */}
+                        </div>
 
 
                         <div className='scroll'>
-                            {currentRecords.length > 0 ?
-                                (
-                                    <table className="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Employee Name</th>
-                                                <th className='vertical-row-color' scope="col">|</th>
-                                                <th scope="col">Leave Type</th>
-                                                <th className='vertical-row-color' scope="col">|</th>
-                                                <th scope="col">From Date</th>
-                                                <th className='vertical-row-color' scope="col">|</th>
-                                                <th scope="col">To Date</th>
-                                                <th className='vertical-row-color' scope="col">|</th>
-                                                <th scope="col">Status</th>
-                                                <th className='vertical-row-color' scope="col">|</th>
-                                                <th scope="col">Reason</th>
-                                                <th className='vertical-row-color' scope="col">|</th>
-                                                <th scope="col">Action</th>
-                                            </tr>
-                                        </thead>
 
+                            <table className="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Employee Name</th>
+                                        <th className='vertical-row-color' scope="col">|</th>
+                                        <th scope="col">Leave Type</th>
+                                        <th className='vertical-row-color' scope="col">|</th>
+                                        <th scope="col">From Date</th>
+                                        <th className='vertical-row-color' scope="col">|</th>
+                                        <th scope="col">To Date</th>
+                                        <th className='vertical-row-color' scope="col">|</th>
+                                        <th scope="col">Status</th>
+                                        <th className='vertical-row-color' scope="col">|</th>
+                                        <th scope="col">Reason</th>
+                                        <th className='vertical-row-color' scope="col">|</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
 
-                                        <tbody>
-                                            {currentRecords.map((item, i) => {
-                                                return (
-                                                    <tr key={i}>
-                                                        <td className='text-capitalize'>{item.employeeName}</td>
-                                                        <td className='vertical-row-color'>|</td>
-                                                        <td>{item.leaveType}</td>
-                                                        <td className='vertical-row-color'>|</td>
-                                                        <td>{item.fromDate.substring(0, 10)}</td>
-                                                        <td className='vertical-row-color'>|</td>
-                                                        <td>{item.toDate.substring(0, 10)}</td>
-                                                        <td className='vertical-row-color'>|</td>
-                                                        <td>{item.status}</td>
-                                                        <td className='vertical-row-color'>|</td>
-                                                        <td>{item.reason}</td>
-                                                        <td className='vertical-row-color'>|</td>
-                                                        <td><FaEdit style={{ width: 50, height: 30, cursor: 'pointer' }}
+                                {allleave ? (
+                                    <tbody>
+                                        {currentRecords.map((item, i) => {
+                                            return (
+                                                <tr key={i}>
+                                                    <td className='text-capitalize'>{item.employeeName}</td>
+                                                    <td className='vertical-row-color'>|</td>
+                                                    <td>{item.leaveType}</td>
+                                                    <td className='vertical-row-color'>|</td>
+                                                    <td>{item.fromDate.substring(0, 10)}</td>
+                                                    <td className='vertical-row-color'>|</td>
+                                                    <td>{item.toDate.substring(0, 10)}</td>
+                                                    <td className='vertical-row-color'>|</td>
+                                                    <td>{item.status}</td>
+                                                    <td className='vertical-row-color'>|</td>
+                                                    <td>{item.reason}</td>
+                                                    <td className='vertical-row-color'>|</td>
+                                                    <td><FaEdit style={{ width: 50, height: 30, cursor: 'pointer' }}
+                                                        onClick={() => {
+                                                            handleEditStatus(item._id);
+                                                        }} /><span className='vertical-row-color'>|</span> <AiFillDelete style={{ width: 50, height: 30, cursor: 'pointer' }}
                                                             onClick={() => {
-                                                                handleEditStatus(item._id);
-                                                            }} /><span className='vertical-row-color'>|</span> <AiFillDelete style={{ width: 50, height: 30, cursor: 'pointer' }}
-                                                                onClick={() => {
-                                                                    DeleteLeaves(item._id);
-                                                                }} /></td>
-                                                        <Modal show={editstatus === item._id ? true : false} onHide={handleClose}>
-                                                            <EditLeave leavelist={item} />
-                                                        </Modal>
-                                                    </tr>
-                                                )
-                                            })}
-                                        </tbody>
-                                    </table>
-                                ) :
-                                <div className='text-center'>
-                                    <img src={NoRecord} alt='NoRecord' className='mt-4 w-10' />
-                                </div>
-                            }
+                                                                DeleteLeaves(item._id);
+                                                            }} /></td>
+                                                    <Modal show={editstatus === item._id ? true : false} onHide={handleClose}>
+                                                        <EditLeave leavelist={item} />
+                                                    </Modal>
+                                                </tr>
+                                            )
+                                        })}
+                                    </tbody>
+                                ) : null}
 
+                                {pendingleave ? (
+                                    <tbody>
+                                        {pendingRecords.map((item, i) => {
+                                            return (
+                                                <tr key={i}>
+                                                    <td className='text-capitalize'>{item.employeeName}</td>
+                                                    <td className='vertical-row-color'>|</td>
+                                                    <td>{item.leaveType}</td>
+                                                    <td className='vertical-row-color'>|</td>
+                                                    <td>{item.fromDate.substring(0, 10)}</td>
+                                                    <td className='vertical-row-color'>|</td>
+                                                    <td>{item.toDate.substring(0, 10)}</td>
+                                                    <td className='vertical-row-color'>|</td>
+                                                    <td>{item.status}</td>
+                                                    <td className='vertical-row-color'>|</td>
+                                                    <td>{item.reason}</td>
+                                                    <td className='vertical-row-color'>|</td>
+                                                    <td><FaEdit style={{ width: 50, height: 30, cursor: 'pointer' }}
+                                                        onClick={() => {
+                                                            handleEditStatus(item._id);
+                                                        }} /><span className='vertical-row-color'>|</span> <AiFillDelete style={{ width: 50, height: 30, cursor: 'pointer' }}
+                                                            onClick={() => {
+                                                                DeleteLeaves(item._id);
+                                                            }} /></td>
+                                                    <Modal show={editstatus === item._id ? true : false} onHide={handleClose}>
+                                                        <EditLeave leavelist={item} />
+                                                    </Modal>
+                                                </tr>
+                                            )
+                                        })}
+                                    </tbody>
+                                ) : null}
+
+                                {approvedleave ? (
+                                    <tbody>
+                                        {approvedRecords.map((item, i) => {
+                                            return (
+                                                <tr key={i}>
+                                                    <td className='text-capitalize'>{item.employeeName}</td>
+                                                    <td className='vertical-row-color'>|</td>
+                                                    <td>{item.leaveType}</td>
+                                                    <td className='vertical-row-color'>|</td>
+                                                    <td>{item.fromDate.substring(0, 10)}</td>
+                                                    <td className='vertical-row-color'>|</td>
+                                                    <td>{item.toDate.substring(0, 10)}</td>
+                                                    <td className='vertical-row-color'>|</td>
+                                                    <td>{item.status}</td>
+                                                    <td className='vertical-row-color'>|</td>
+                                                    <td>{item.reason}</td>
+                                                    <td className='vertical-row-color'>|</td>
+                                                    <td><FaEdit style={{ width: 50, height: 30, cursor: 'pointer' }}
+                                                        onClick={() => {
+                                                            handleEditStatus(item._id);
+                                                        }} /><span className='vertical-row-color'>|</span> <AiFillDelete style={{ width: 50, height: 30, cursor: 'pointer' }}
+                                                            onClick={() => {
+                                                                DeleteLeaves(item._id);
+                                                            }} /></td>
+                                                    <Modal show={editstatus === item._id ? true : false} onHide={handleClose}>
+                                                        <EditLeave leavelist={item} />
+                                                    </Modal>
+                                                </tr>
+                                            )
+                                        })}
+                                    </tbody>
+                                ) : null}
+
+                                {rejectedleave ? (
+                                    <tbody>
+                                        {rejectedRecords.map((item, i) => {
+                                            return (
+                                                <tr key={i}>
+                                                    <td className='text-capitalize'>{item.employeeName}</td>
+                                                    <td className='vertical-row-color'>|</td>
+                                                    <td>{item.leaveType}</td>
+                                                    <td className='vertical-row-color'>|</td>
+                                                    <td>{item.fromDate.substring(0, 10)}</td>
+                                                    <td className='vertical-row-color'>|</td>
+                                                    <td>{item.toDate.substring(0, 10)}</td>
+                                                    <td className='vertical-row-color'>|</td>
+                                                    <td>{item.status}</td>
+                                                    <td className='vertical-row-color'>|</td>
+                                                    <td>{item.reason}</td>
+                                                    <td className='vertical-row-color'>|</td>
+                                                    <td><FaEdit style={{ width: 50, height: 30, cursor: 'pointer' }}
+                                                        onClick={() => {
+                                                            handleEditStatus(item._id);
+                                                        }} /><span className='vertical-row-color'>|</span> <AiFillDelete style={{ width: 50, height: 30, cursor: 'pointer' }}
+                                                            onClick={() => {
+                                                                DeleteLeaves(item._id);
+                                                            }} /></td>
+                                                    <Modal show={editstatus === item._id ? true : false} onHide={handleClose}>
+                                                        <EditLeave leavelist={item} />
+                                                    </Modal>
+                                                </tr>
+                                            )
+                                        })}
+                                    </tbody>
+                                ) : null}
+                            </table>
+
+                            {allleave && currentRecords.length === 0 ?
+                                <div className='text-center'>
+                                    <img src={NoRecord} alt='NoRecord' className='w-10' />
+                                </div>
+                                : null}
+                            {pendingleave && pendingRecords.length === 0 ?
+                                <div className='text-center'>
+                                    <img src={NoRecord} alt='NoRecord' className='w-10' />
+                                </div>
+                                : null}
+                            {approvedleave && approvedRecords.length === 0 ?
+                                <div className='text-center'>
+                                    <img src={NoRecord} alt='NoRecord' className='w-10' />
+                                </div>
+                                : null}
+                            {rejectedleave && rejectedRecords.length === 0 ?
+                                <div className='text-center'>
+                                    <img src={NoRecord} alt='NoRecord' className='w-10' />
+                                </div>
+                                : null}
 
 
                         </div>
                     </div>
                 </div>
-                {currentRecords.length > 0 ?
+                {/* {currentRecords.length > 0 ?
                     (
                         <div className='d-flex'>
                             <div className="p-2 w-100 fs-6 fw-bold text-secondary">
@@ -223,13 +348,73 @@ const AllLeaves = () => {
                             </div>
                             <div className="p-2 flex-shrink-1">
                                 <Pagination
-                                    nPages={nPages}
+                                    nPages={allPages}
                                     currentPage={currentPage}
                                     setCurrentPage={setCurrentPage}
                                 /></div>
 
                         </div>
-                    ) : null}
+                    ) : null} */}
+
+                {allleave && currentRecords.length > 0 ?
+                    <div className='d-flex'>
+                        <div className="p-2 w-100 fs-6 fw-bold text-secondary">
+                            Displaying {currentPage} to {currentRecords.length}  of {currentRecords.length} records
+                        </div>
+                        <div className="p-2 flex-shrink-1">
+                            <Pagination
+                                nPages={allPages}
+                                currentPage={currentPage}
+                                setCurrentPage={setCurrentPage}
+                            /></div>
+
+                    </div>
+                    : null}
+
+                {pendingleave && pendingRecords.length > 0 ?
+                    <div className='d-flex'>
+                        <div className="p-2 w-100 fs-6 fw-bold text-secondary">
+                            Displaying {currentPage} to {pendingRecords.length}  of {pendingRecords.length} records
+                        </div>
+                        <div className="p-2 flex-shrink-1">
+                            <Pagination
+                                nPages={pendingPages}
+                                currentPage={currentPage}
+                                setCurrentPage={setCurrentPage}
+                            /></div>
+
+                    </div>
+                    : null}
+
+                {approvedleave && approvedRecords.length > 0 ?
+                    <div className='d-flex'>
+                        <div className="p-2 w-100 fs-6 fw-bold text-secondary">
+                            Displaying {currentPage} to {approvedRecords.length}  of {approvedRecords.length} records
+                        </div>
+                        <div className="p-2 flex-shrink-1">
+                            <Pagination
+                                nPages={approvedPages}
+                                currentPage={currentPage}
+                                setCurrentPage={setCurrentPage}
+                            /></div>
+
+                    </div>
+                    : null}
+
+                {rejectedleave && rejectedRecords.length > 0 ?
+                    <div className='d-flex'>
+                        <div className="p-2 w-100 fs-6 fw-bold text-secondary">
+                            Displaying {currentPage} to {rejectedRecords.length}  of {rejectedRecords.length} records
+                        </div>
+                        <div className="p-2 flex-shrink-1">
+                            <Pagination
+                                nPages={rejectedPages}
+                                currentPage={currentPage}
+                                setCurrentPage={setCurrentPage}
+                            /></div>
+
+                    </div>
+                    : null}
             </div>
         </>
     );

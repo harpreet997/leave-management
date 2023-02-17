@@ -8,6 +8,7 @@ import Pendingleave from '../../assets/Pendingleave.png';
 import NoRecord from '../../assets/NoRecord.png';
 import '../../styles/dashboard.css';
 
+
 const UserDashboard = () => {
     const [todayleave, setTodayLeave] = useState(true);
     const [laterleave, setLaterLeave] = useState(false);

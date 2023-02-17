@@ -5,13 +5,11 @@ import ApplyLeave from '../leave/ApplyLeave';
 import AllLeaves from '../leave/AllLeaves';
 import UserDashboard from '../userDashboard/UserDashboard';
 import EmployeeList from '../employee/EmployeeList';
+import ProjectList from '../projects/ProjectList';
 
 const MainRouter = () => {
 
     const token = localStorage.getItem('token')
-
-    console.log(token)
-    
     return (
         <Routes>
             <Route path="/" element={<Login />} />
@@ -20,7 +18,8 @@ const MainRouter = () => {
             <Route path="/leave" element={token === null ? <Login /> : <Dashboard />} />
             <Route path="/apply-leave" element={token === null ? <Login /> : <ApplyLeave/>} />
             <Route path="/all-leaves" element={token === null ? <Login /> : <AllLeaves/>} />
-            <Route path="/employee" element={token === null ? <Login /> : <EmployeeList/>} />
+            <Route path="/employees" element={token === null ? <Login /> : <EmployeeList/>} />
+            <Route path="/projects" element={token === null ? <Login /> : <ProjectList/>} />
         </Routes>
     )
 }

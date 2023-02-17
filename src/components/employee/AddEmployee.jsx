@@ -35,7 +35,7 @@ const AddEmployee = () => {
     return (
         <>
             <Modal.Header closeButton>
-                <Modal.Title className="text-white" style={{ paddingLeft: 160 }}>Add Employee</Modal.Title>
+                <Modal.Title className="text-center">Add Employee</Modal.Title>
             </Modal.Header>
             <form onSubmit={AddEmployee}>
                 <Modal.Body>

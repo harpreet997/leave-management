@@ -28,3 +28,15 @@ export const editEmployee = (id, editemployee, headers) => {
 export const deleteEmployee = (id, headers) => {
     return axios.delete(`${baseUrl}/api/v1/employee/${id}`, {headers})
 }
+
+export const addProject = (addproject, headers) => {
+    return axios.post(`${baseUrl}/api/v1/project/add`, addproject, {headers})
+} 
+
+export const editProject = (id, editemployee, headers) => {
+    return axios.put(`${baseUrl}/api/v1/project/${id}`, editemployee, {headers})
+} 
+
+export const deleteProject = (id, headers) => {
+    return axios.delete(`${baseUrl}/api/v1/project/${id}`, {headers})
+}

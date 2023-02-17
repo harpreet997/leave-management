@@ -147,6 +147,7 @@
   }
   
 
+
   @media screen and (max-width: 400px) {
     .logout-button{
       margin-left: 155px !important;
@@ -167,5 +168,9 @@
   .text-capitalize{
     text-transform: capitalize;
   }
+  
+
+ 
+
   
   

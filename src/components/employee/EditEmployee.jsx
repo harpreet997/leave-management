@@ -36,7 +36,7 @@ const EditEmployee = ({data, id}) => {
     return (
         <>
             <Modal.Header closeButton>
-                <Modal.Title className="text-white" style={{ paddingLeft: 160 }}>Edit Employee</Modal.Title>
+                <Modal.Title className="text-center">Edit Employee</Modal.Title>
             </Modal.Header>
             <form onSubmit={UpdateEmployee}>
                 <Modal.Body>

@@ -12,3 +12,7 @@ export const getDashboardLeaves = () => {
 export const getEmployees = (headers) => {
     return axios.get(`${baseUrl}/api/v1/employee/list`, {headers})
 }
+
+export const getProjects = (headers) => {
+    return axios.get(`${baseUrl}/api/v1/project/list`, {headers})
+}
