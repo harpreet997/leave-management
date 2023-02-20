@@ -16,3 +16,12 @@ export const getEmployees = (headers) => {
 export const getProjects = (headers) => {
     return axios.get(`${baseUrl}/api/v1/project/list`, {headers})
 }
+
+export const getEmployeeProjectsDetails = (headers) => {
+    return axios.get(`${baseUrl}/api/v1/employee/dashboard`, {headers})
+}
+
+
+export const getEmployeeDetail = (id, headers) => {
+    return axios.get(`${baseUrl}/api/v1/employee/${id}`, {headers})
+}

@@ -6,6 +6,8 @@ import { headers } from "../../header";
 const AddProject = () => {
     const [addproject, setAddProject] = useState({
         name: "",
+        startAt: "",
+        endAt: "",
         clientName: "",
         clientPhoneNumber: "",
         clientEmail: ""
@@ -45,6 +47,16 @@ const AddProject = () => {
                     <div className="mb-3">
                         <p className="text-start">Project Name</p>
                         <input type="text" className="form-control w-100" id="name" name="name" placeholder="Project Name"
+                            onChange={handleChange} required />
+                    </div>
+                    <div className="mb-3">
+                        <p className="text-start">Project Start Date</p>
+                        <input type="date" className="form-control w-100" id="startAt" name="startAt" 
+                            onChange={handleChange} required />
+                    </div>
+                    <div className="mb-3">
+                        <p className="text-start">Project End Date</p>
+                        <input type="date" className="form-control w-100" id="endAt" name="endAt" 
                             onChange={handleChange} required />
                     </div>
 

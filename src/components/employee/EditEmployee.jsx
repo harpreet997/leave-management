@@ -1,14 +1,46 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button, Modal } from "react-bootstrap";
 import { editEmployee } from "../../postdata/postdata";
+import { getProjects, getEmployeeDetail } from "../../getdata/getdata";
 import { headers } from "../../header";
 
 const EditEmployee = ({data, id}) => {
     const [editemployee, setEditEmployee] = useState({
         name: data.name,
         email: data.email,
-        
+        assignedProject: ""
     })
+
+    const [projectlist, setProjectList] = useState([]);
+    const [projectname, setProjectName] = useState('')
+
+console.log(data.assignedProject)
+console.log(id);
+    console.log(editemployee.assignedProject);
+
+    useEffect(() => {
+
+        getEmployeeDetail(id, headers)
+        .then((response) => {
+            if(data.assignedProject === null)
+            {
+                setProjectName("Bench");
+            }
+            console.log(response.data.data.assignedProject[0].name)
+            setProjectName(response.data.data.assignedProject[0].name)
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+
+        getProjects(headers)
+            .then((response) => {
+                setProjectList(response.data.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }, []);
 
     const handleChange = (event) => {
         setEditEmployee({
@@ -19,6 +51,9 @@ const EditEmployee = ({data, id}) => {
 
     const UpdateEmployee = (event) => {
         event.preventDefault();
+        if(editemployee.assignedProject === "Bench")
+        {
+        editemployee.assignedProject = null;
         editEmployee(id, editemployee, headers)
         .then((response) => {
             alert(response.data.message)
@@ -28,6 +63,16 @@ const EditEmployee = ({data, id}) => {
             console.log(error);
         })
     }
+    else{
+        editEmployee(id, editemployee, headers)
+        .then((response) => {
+            alert(response.data.message)
+            window.location.reload(false)
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+    }}
 
     const handleClose = () => {
         window.location.reload(false);
@@ -52,6 +97,20 @@ const EditEmployee = ({data, id}) => {
                         <input type="email" className="form-control w-100" id="email" name="email" placeholder="Email Address"
                         value={editemployee.email} onChange={handleChange} required/>
                     </div>
+                    <div className="mb-3">
+                        <p className="text-start">Project Assigned</p>
+                        <select className="form-input-width form-select w-100" name="assignedProject"   
+                         onChange={handleChange} required>
+                            <option value={projectname}>{projectname}</option>
+                            {projectlist.map((item, i) => {
+                                return (
+                                    <option key={i} value={item._id}>{item.name}</option>
+                                )
+                            })}
+                            <option value="Bench">Bench</option>
+
+                        </select>
+                    </div>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
@@ -66,4 +125,4 @@ const EditEmployee = ({data, id}) => {
     );
 }
 
-export default EditEmployee;
+export default EditEmployee

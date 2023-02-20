@@ -6,6 +6,8 @@ import { headers } from "../../header";
 const EditProject = ({data, id}) => {
     const [editproject, setEditEmployee] = useState({
         name: data.name,
+        startAt: data.startAt.substring(0, 10),
+        endAt: data.endAt.substring(0, 10),
         clientName: data.clientName,
         clientPhoneNumber: data.clientPhoneNumber,
         clientEmail: data.clientEmail
@@ -47,6 +49,16 @@ const EditProject = ({data, id}) => {
                         <p className="text-start">Project Name</p>
                         <input type="text" className="text-capitalize form-control w-100" id="name" name="name" placeholder="Project Name"
                         value={editproject.name} onChange={handleChange} required/>
+                    </div>
+                    <div className="mb-3">
+                        <p className="text-start">Project Start Date</p>
+                        <input type="date" className="form-control w-100" id="startAt" name="startAt" 
+                           value={editproject.startAt} onChange={handleChange} required />
+                    </div>
+                    <div className="mb-3">
+                        <p className="text-start">Project End Date</p>
+                        <input type="date" className="form-control w-100" id="endAt" name="endAt" 
+                          value={editproject.endAt}  onChange={handleChange} required />
                     </div>
 
                     <div className="mb-3">
