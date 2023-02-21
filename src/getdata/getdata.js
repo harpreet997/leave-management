@@ -9,14 +9,8 @@ export const getDashboardLeaves = () => {
     return axios.post(`${baseUrl}/api/v1/leave/dashboard/list`)
 }
 
-export const getEmployees = (headers, pagination) => {
-        var config = {
-            method: "get",
-            url: `${baseUrl}/api/v1/employee/list`,
-            params: { page: pagination , limit : 10},
-            headers: headers,
-          };
-          return axios(config)
+export const getEmployees = (headers) => {
+          return axios.get(`${baseUrl}/api/v1/employee/list`, {headers})
       }
 
 

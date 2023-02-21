@@ -5,14 +5,15 @@ import { getProjects, getEmployeeDetail } from "../../getdata/getdata";
 import { headers } from "../../header";
 
 const EditEmployee = ({data, id, project}) => {
+    const [projectname, setProjectName] = useState('Bench')
     const [editemployee, setEditEmployee] = useState({
         name: data.name,
         email: data.email,
-        assignedProject: project
+        assignedProject: projectname
     })
 
     const [projectlist, setProjectList] = useState([]);
-    const [projectname, setProjectName] = useState('')
+    
 
 console.log(data.assignedProject)
 console.log(id);
@@ -40,7 +41,7 @@ console.log(id);
             .catch((error) => {
                 console.log(error);
             })
-    }, []);
+    }, [data.assignedProject, id]);
 
     const handleChange = (event) => {
         setEditEmployee({

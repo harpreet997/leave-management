@@ -3,7 +3,7 @@ import Sidebar from '../sidebar/Sidebar';
 import { Modal } from "react-bootstrap";
 import { FaEdit } from 'react-icons/fa';
 import { AiFillDelete } from 'react-icons/ai';
-// import Pagination from '../pagination/Pagination';
+import Pagination from '../pagination/Pagination';
 import NoRecord from '../../assets/NoRecord.png';
 import AddEmployee from './AddEmployee';
 import { getEmployees, getEmployeeDetail } from '../../getdata/getdata';
@@ -11,7 +11,6 @@ import { deleteEmployee } from '../../postdata/postdata';
 import { headers } from '../../header';
 import EditEmployee from './EditEmployee';
 import '../../styles/dashboard.css';
-import Pagination from "react-js-pagination";
 
 const EmployeeList = () => {
     const [addemployee, setAddEmployee] = useState(false);
@@ -24,21 +23,20 @@ const EmployeeList = () => {
     const currentRecords = employeelist.slice(indexOfFirstRecord, indexOfLastRecord);
     const nPages = Math.ceil(employeelist.length / recordsPerPage);
     const [projectname, setProjectName] = useState('')
-    const [pagination, setPagination] = useState(1);
-    const [totalCount, setTotalCount] = useState(0);
+    
 
     useEffect(() => {
-        getEmployees(headers, pagination)
+        getEmployees(headers)
             .then((response) => {
+                console.log(response.data.data);
                 setEmployeeList(response.data.data);
-                setTotalCount(response.data.totalCount)
             })
             .catch((error) => {
                 console.log(error);
             })
-    }, [pagination]);
+    }, []);
 
-    console.log(totalCount)
+    
 
     const AddEmployeeModal = () => {
         setAddEmployee(true)
@@ -62,7 +60,7 @@ const EmployeeList = () => {
 
 
     const ViewEmployee = (id) => {
-        getEmployeeDetail(id, pagination, headers)
+        getEmployeeDetail(id, headers)
             .then((response) => {
                 if (response.data.data.assignedProject === null) {
                     setProjectName("Bench");
@@ -140,9 +138,6 @@ const EmployeeList = () => {
                                     <img src={NoRecord} alt='NoRecord' className='mt-4 w-10' />
                                 </div>
                             }
-
-
-
                         </div>
                     </div>
                 </div>
@@ -153,21 +148,12 @@ const EmployeeList = () => {
                                 Displaying {currentPage} to {currentRecords.length}  of {currentRecords.length} records
                             </div>
                             <div className="p-2 flex-shrink-1">
-                                <Pagination
-                                    activePage={pagination}
-                                    itemsCountPerPage={10}
-                                    totalItemsCount={totalCount}
-                                    pageRangeDisplayed={Math.ceil(totalCount / 10)}
-                                    itemClass="page-item"
-                                    linkClass="page-link"
-                                    onChange={(e) => {
-                                        setPagination(e);
-                                    }}
-                                />
-
+                            <Pagination
+                                nPages={nPages}
+                                currentPage={currentPage}
+                                setCurrentPage={setCurrentPage}
+                            />
                             </div>
-
-
                         </div>
                     ) : null}
             </div>

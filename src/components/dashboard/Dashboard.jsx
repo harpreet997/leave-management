@@ -48,8 +48,8 @@ const Dashboard = () => {
     return (
         <>
             <Sidebar />
-            <div className="content">
-                <div className='row mb-1'>
+            <div className="content" >
+                <div className='row mb-1' style={{marginTop: 1}}>
                     <div className="col-lg-6">
                         <div className='card' style={leavedetails ? { backgroundColor: "lightgreen", cursor: 'pointer' } : { cursor: 'pointer' }}
                             onClick={() => {
