@@ -100,8 +100,8 @@ console.log(id);
                     <div className="mb-3">
                         <p className="text-start">Project Assigned</p>
                         <select className="form-select w-100" name="assignedProject"   
-                         value={editemployee.assignedProject} onChange={handleChange} required>
-                            <option value={editemployee.assignedProject}>{editemployee.assignedProject}</option>
+                          onChange={handleChange} required>
+                            <option value={projectname}>{projectname}</option>
                             {projectlist.map((item, i) => {
                                 return (
                                     <option key={i} value={item._id}>{item.name}</option>

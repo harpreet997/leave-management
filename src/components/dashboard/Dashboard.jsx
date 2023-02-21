@@ -49,8 +49,6 @@ const Dashboard = () => {
         <>
             <Sidebar />
             <div className="content">
-                
-
                 <div className='row mb-1'>
                     <div className="col-lg-6">
                         <div className='card' style={leavedetails ? { backgroundColor: "lightgreen", cursor: 'pointer' } : { cursor: 'pointer' }}
