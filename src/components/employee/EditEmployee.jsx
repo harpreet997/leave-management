@@ -4,11 +4,11 @@ import { editEmployee } from "../../postdata/postdata";
 import { getProjects, getEmployeeDetail } from "../../getdata/getdata";
 import { headers } from "../../header";
 
-const EditEmployee = ({data, id}) => {
+const EditEmployee = ({data, id, project}) => {
     const [editemployee, setEditEmployee] = useState({
         name: data.name,
         email: data.email,
-        assignedProject: ""
+        assignedProject: project
     })
 
     const [projectlist, setProjectList] = useState([]);
@@ -99,9 +99,9 @@ console.log(id);
                     </div>
                     <div className="mb-3">
                         <p className="text-start">Project Assigned</p>
-                        <select className="form-input-width form-select w-100" name="assignedProject"   
-                         onChange={handleChange} required>
-                            <option value={projectname}>{projectname}</option>
+                        <select className="form-select w-100" name="assignedProject"   
+                         value={editemployee.assignedProject} onChange={handleChange} required>
+                            <option value={editemployee.assignedProject}>{editemployee.assignedProject}</option>
                             {projectlist.map((item, i) => {
                                 return (
                                     <option key={i} value={item._id}>{item.name}</option>

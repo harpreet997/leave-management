@@ -49,7 +49,7 @@ const Dashboard = () => {
         <>
             <Sidebar />
             <div className="content">
-                {/* <div className='card'> */}
+                
 
                 <div className='row mb-1'>
                     <div className="col-lg-6">
@@ -77,15 +77,10 @@ const Dashboard = () => {
                                 <p className='fs-6 fw-bold text-secondary text-center'>Project Details</p>
                             </div>
                         </div>
-
-
                     </div>
-                    {/* <div className='d-flex'>
-                            <p>Leave Details</p>
-                            <p>Project Details</p>
-                        </div> */}
+                 
                 </div>
-                {/* </div> */}
+                
 
                 {leavedetails ? (
                     <div className="card mt-1">
@@ -112,7 +107,7 @@ const Dashboard = () => {
                                     </div>
                                 </div>
                                 <div className="col-md-4">
-                                    <div className='card' style={laterleave ? { backgroundColor: "lightgreen", cursor: 'pointer' } : { cursor: 'pointer' }} onClick={() => {
+                                    <div className='card' style={laterleave ? { backgroundColor: "lightgreen", cursor: 'pointer', height: "100%" } : { cursor: 'pointer' }} onClick={() => {
                                         setLaterLeave(true);
                                         setTodayLeave(false);
                                         setLeaveStatus(false);

@@ -3,14 +3,15 @@ import Sidebar from '../sidebar/Sidebar';
 import { Modal } from "react-bootstrap";
 import { FaEdit } from 'react-icons/fa';
 import { AiFillDelete } from 'react-icons/ai';
-import Pagination from '../pagination/Pagination';
+// import Pagination from '../pagination/Pagination';
 import NoRecord from '../../assets/NoRecord.png';
 import AddEmployee from './AddEmployee';
-import { getEmployees } from '../../getdata/getdata';
+import { getEmployees, getEmployeeDetail } from '../../getdata/getdata';
 import { deleteEmployee } from '../../postdata/postdata';
 import { headers } from '../../header';
 import EditEmployee from './EditEmployee';
 import '../../styles/dashboard.css';
+import Pagination from "react-js-pagination";
 
 const EmployeeList = () => {
     const [addemployee, setAddEmployee] = useState(false);
@@ -22,17 +23,22 @@ const EmployeeList = () => {
     const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
     const currentRecords = employeelist.slice(indexOfFirstRecord, indexOfLastRecord);
     const nPages = Math.ceil(employeelist.length / recordsPerPage);
+    const [projectname, setProjectName] = useState('')
+    const [pagination, setPagination] = useState(1);
+    const [totalCount, setTotalCount] = useState(0);
 
     useEffect(() => {
-        getEmployees(headers)
+        getEmployees(headers, pagination)
             .then((response) => {
-                console.log(response.data.data)
                 setEmployeeList(response.data.data);
+                setTotalCount(response.data.totalCount)
             })
             .catch((error) => {
                 console.log(error);
             })
-    }, []);
+    }, [pagination]);
+
+    console.log(totalCount)
 
     const AddEmployeeModal = () => {
         setAddEmployee(true)
@@ -48,6 +54,21 @@ const EmployeeList = () => {
             .then((response) => {
                 alert(response.data.message);
                 window.location.reload(false);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }
+
+
+    const ViewEmployee = (id) => {
+        getEmployeeDetail(id, pagination, headers)
+            .then((response) => {
+                if (response.data.data.assignedProject === null) {
+                    setProjectName("Bench");
+                }
+                console.log(response.data.data.assignedProject[0].name)
+                setProjectName(response.data.data.assignedProject[0].name)
             })
             .catch((error) => {
                 console.log(error);
@@ -101,12 +122,13 @@ const EmployeeList = () => {
                                                         <td><FaEdit style={{ width: 50, height: 30, cursor: 'pointer' }}
                                                             onClick={() => {
                                                                 EditEmployeeModal(item._id);
+                                                                ViewEmployee(item._id);
                                                             }} /><span className='vertical-row-color'>|</span> <AiFillDelete style={{ width: 50, height: 30, cursor: 'pointer' }}
                                                                 onClick={() => {
                                                                     DeleteEmployee(item._id);
                                                                 }} /></td>
                                                         <Modal show={editemployee === item._id ? true : false} onHide={handleEditClose}>
-                                                            <EditEmployee data={item} id={item._id}/>
+                                                            <EditEmployee data={item} id={item._id} project={projectname} />
                                                         </Modal>
                                                     </tr>
                                                 )
@@ -132,10 +154,19 @@ const EmployeeList = () => {
                             </div>
                             <div className="p-2 flex-shrink-1">
                                 <Pagination
-                                    nPages={nPages}
-                                    currentPage={currentPage}
-                                    setCurrentPage={setCurrentPage}
-                                /></div>
+                                    activePage={pagination}
+                                    itemsCountPerPage={10}
+                                    totalItemsCount={totalCount}
+                                    pageRangeDisplayed={Math.ceil(totalCount / 10)}
+                                    itemClass="page-item"
+                                    linkClass="page-link"
+                                    onChange={(e) => {
+                                        setPagination(e);
+                                    }}
+                                />
+
+                            </div>
+
 
                         </div>
                     ) : null}
