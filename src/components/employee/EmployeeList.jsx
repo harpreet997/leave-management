@@ -23,13 +23,14 @@ const EmployeeList = () => {
     const currentRecords = employeelist.slice(indexOfFirstRecord, indexOfLastRecord);
     const nPages = Math.ceil(employeelist.length / recordsPerPage);
     const [projectname, setProjectName] = useState('')
-    
+    const [projectid, setProjectId] = useState('')
+    const [totalrecords, setTotalRecords] = useState(0);
 
     useEffect(() => {
         getEmployees(headers)
             .then((response) => {
-                console.log(response.data.data);
                 setEmployeeList(response.data.data);
+                setTotalRecords(response.data.data.length)
             })
             .catch((error) => {
                 console.log(error);
@@ -43,7 +44,11 @@ const EmployeeList = () => {
     };
 
     const EditEmployeeModal = (id) => {
-        setEditEmployee(id)
+        const timer =  setTimeout(() => {
+            setEditEmployee(id)
+        }, 1000)
+         return () => clearTimeout(timer);
+        
     };
 
 
@@ -65,8 +70,11 @@ const EmployeeList = () => {
                 if (response.data.data.assignedProject === null) {
                     setProjectName("Bench");
                 }
+                else{
                 console.log(response.data.data.assignedProject[0].name)
                 setProjectName(response.data.data.assignedProject[0].name)
+                setProjectId(response.data.data.assignedProject[0]._id)
+                }
             })
             .catch((error) => {
                 console.log(error);
@@ -119,14 +127,15 @@ const EmployeeList = () => {
                                                         <td className='vertical-row-color'>|</td>
                                                         <td><FaEdit style={{ width: 50, height: 30, cursor: 'pointer' }}
                                                             onClick={() => {
-                                                                EditEmployeeModal(item._id);
                                                                 ViewEmployee(item._id);
+                                                                EditEmployeeModal(item._id);
+                                                                
                                                             }} /><span className='vertical-row-color'>|</span> <AiFillDelete style={{ width: 50, height: 30, cursor: 'pointer' }}
                                                                 onClick={() => {
                                                                     DeleteEmployee(item._id);
                                                                 }} /></td>
                                                         <Modal show={editemployee === item._id ? true : false} onHide={handleEditClose}>
-                                                            <EditEmployee data={item} id={item._id} project={projectname} />
+                                                            <EditEmployee data={item} id={item._id} project={projectname} projectid={projectid}/>
                                                         </Modal>
                                                     </tr>
                                                 )
@@ -145,7 +154,7 @@ const EmployeeList = () => {
                     (
                         <div className='d-flex'>
                             <div className="p-2 w-100 fs-6 fw-bold text-secondary">
-                                Displaying {currentPage} to {currentRecords.length}  of {currentRecords.length} records
+                                Showing {indexOfFirstRecord+1} to {currentPage === nPages ? totalrecords: indexOfLastRecord}  of {totalrecords} records
                             </div>
                             <div className="p-2 flex-shrink-1">
                             <Pagination

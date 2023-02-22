@@ -22,11 +22,13 @@ const ProjectList = () => {
     const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
     const currentRecords = projectlist.slice(indexOfFirstRecord, indexOfLastRecord);
     const nPages = Math.ceil(projectlist.length / recordsPerPage);
+    const [totalrecords, setTotalRecords] = useState(0);
 
     useEffect(() => {
         getProjects(headers)
             .then((response) => {
                 setProjectList(response.data.data);
+                setTotalRecords(response.data.data.length)
             })
             .catch((error) => {
                 console.log(error);
@@ -135,7 +137,7 @@ const ProjectList = () => {
                     (
                         <div className='d-flex'>
                             <div className="p-2 w-100 fs-6 fw-bold text-secondary">
-                                Displaying {currentPage} to {currentRecords.length}  of {currentRecords.length} records
+                            Showing {indexOfFirstRecord+1} to {currentPage === nPages ? totalrecords: indexOfLastRecord}  of {totalrecords} records
                             </div>
                             <div className="p-2 flex-shrink-1">
                                 <Pagination

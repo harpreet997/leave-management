@@ -17,7 +17,7 @@ const AllLeaves = () => {
     const [rejectedleave, setRejectedLeave] = useState(false);
     const [editstatus, setEditStatus] = useState(false);
     const [leavelist, setLeaveList] = useState([]);
-    const [status, setStatus] = useState('All');
+    const status = 'All';
     const filterdata = leavelist.filter(item => {
         if (status === 'All') {
             return item;
@@ -42,14 +42,13 @@ const AllLeaves = () => {
     const pendingPages = Math.ceil(pendingleaves.length / recordsPerPage);
     const approvedPages = Math.ceil(approvedleaves.length / recordsPerPage);
     const rejectedPages = Math.ceil(rejectedleaves.length / recordsPerPage);
-
-    console.log(filterdata)
-
+    const [totalrecords, setTotalRecords] = useState(0);
 
     useEffect(() => {
         getAllLeaves()
             .then((response) => {
                 setLeaveList(response.data.data);
+                setTotalRecords(response.data.data.length)
             })
             .catch((error) => {
                 console.log(error);
@@ -80,21 +79,6 @@ const AllLeaves = () => {
             <div className="content">
                 <div className="card">
                     <div className="card-body">
-                        {/* <div className='d-flex'>
-                            <h3>ALL Leaves</h3>
-                            <select className="ms-4  w-30" name="status"
-                                onChange={(event) => {
-                                    setStatus(event.target.value);
-
-                                }} >
-                                <option value="All">All</option>
-                                <option value="Pending">Pending</option>
-                                <option value="Approved">Approved</option>
-                                <option value="Rejected">Rejected</option>
-                            </select>
-
-
-                        </div> */}
                         <div className='m-2'>
                             <div className='row'>
                                 <div className='col-lg-3'>
@@ -335,31 +319,15 @@ const AllLeaves = () => {
                                     <img src={NoRecord} alt='NoRecord' className='w-10' />
                                 </div>
                                 : null}
-
-
                         </div>
                     </div>
                 </div>
-                {/* {currentRecords.length > 0 ?
-                    (
-                        <div className='d-flex'>
-                            <div className="p-2 w-100 fs-6 fw-bold text-secondary">
-                                Displaying {currentPage} to {currentRecords.length}  of {currentRecords.length} records
-                            </div>
-                            <div className="p-2 flex-shrink-1">
-                                <Pagination
-                                    nPages={allPages}
-                                    currentPage={currentPage}
-                                    setCurrentPage={setCurrentPage}
-                                /></div>
-
-                        </div>
-                    ) : null} */}
+                
 
                 {allleave && currentRecords.length > 0 ?
                     <div className='d-flex'>
                         <div className="p-2 w-100 fs-6 fw-bold text-secondary">
-                            Displaying {currentPage} to {currentRecords.length}  of {currentRecords.length} records
+                        Showing {indexOfFirstRecord+1} to {currentPage === allPages ? totalrecords: indexOfLastRecord}  of {totalrecords} records
                         </div>
                         <div className="p-2 flex-shrink-1">
                             <Pagination
@@ -374,7 +342,7 @@ const AllLeaves = () => {
                 {pendingleave && pendingRecords.length > 0 ?
                     <div className='d-flex'>
                         <div className="p-2 w-100 fs-6 fw-bold text-secondary">
-                            Displaying {currentPage} to {pendingRecords.length}  of {pendingRecords.length} records
+                        Showing {indexOfFirstRecord+1} to {currentPage === pendingPages ? pendingleaves.length: indexOfLastRecord}  of {pendingleaves.length} records
                         </div>
                         <div className="p-2 flex-shrink-1">
                             <Pagination
@@ -389,7 +357,7 @@ const AllLeaves = () => {
                 {approvedleave && approvedRecords.length > 0 ?
                     <div className='d-flex'>
                         <div className="p-2 w-100 fs-6 fw-bold text-secondary">
-                            Displaying {currentPage} to {approvedRecords.length}  of {approvedRecords.length} records
+                        Showing {indexOfFirstRecord+1} to {currentPage === approvedPages ? approvedleaves.length: indexOfLastRecord}  of {approvedleaves.length} records
                         </div>
                         <div className="p-2 flex-shrink-1">
                             <Pagination
@@ -404,7 +372,7 @@ const AllLeaves = () => {
                 {rejectedleave && rejectedRecords.length > 0 ?
                     <div className='d-flex'>
                         <div className="p-2 w-100 fs-6 fw-bold text-secondary">
-                            Displaying {currentPage} to {rejectedRecords.length}  of {rejectedRecords.length} records
+                        Showing {indexOfFirstRecord+1} to {currentPage === rejectedPages ? rejectedleaves.length: indexOfLastRecord}  of {rejectedleaves.length} records
                         </div>
                         <div className="p-2 flex-shrink-1">
                             <Pagination

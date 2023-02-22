@@ -18,10 +18,10 @@ const ProjectDetails = () => {
     const [recordsPerPage] = useState(10);
     const indexOfLastRecord = currentPage * recordsPerPage;
     const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
-    const todayRecords = assignedprojectlist.slice(indexOfFirstRecord, indexOfLastRecord);
-    const upcomingRecords = unassignedprojectlist.slice(indexOfFirstRecord, indexOfLastRecord);
-    const todayPages = Math.ceil(assignedprojectlist.length / recordsPerPage);
-    const upcomingPages = Math.ceil(unassignedprojectlist.length / recordsPerPage);
+    const assignedRecords = assignedprojectlist.slice(indexOfFirstRecord, indexOfLastRecord);
+    const unassignedRecords = unassignedprojectlist.slice(indexOfFirstRecord, indexOfLastRecord);
+    const assignedPages = Math.ceil(assignedprojectlist.length / recordsPerPage);
+    const unassignedPages = Math.ceil(unassignedprojectlist.length / recordsPerPage);
     
 
     useEffect(() => {
@@ -42,28 +42,19 @@ const ProjectDetails = () => {
     return (
             <div>
                 <div className="card mt-1">
-
                     <div className="card-body">
-
-
                         <div className="row mt-2">
                             <div className="col-md-6">
                                 <div className='card' style={assignedproject ? { backgroundColor: "lightgreen", cursor: 'pointer' } : { cursor: 'pointer' }}
                                     onClick={() => {
-
                                         setAssignedProject(true);
                                         setUnassignedProject(false);
-                                        
                                     }} >
                                     <div className="card-body">
                                         <div className="d-flex">
                                             <div className="p-2 w-100 fs-4 fw-bold text-secondary">On Project</div>
                                             <div className="p-2 fs-1 fw-bold text-secondary flex-shrink-1">0{assignedprojectlist.length}</div>
-                                        </div>
-                                        {/* <div className="d-flex">
-                                            <div className="p-2 w-100"><img src={RecentLeave} alt='RecentLeave' /></div>
-                                            <div className="p-2 fs-6 fw-bold flex-shrink-1">People on leave Today</div>
-                                        </div> */}
+                                        </div>  
                                     </div>
                                 </div>
                             </div>
@@ -78,10 +69,6 @@ const ProjectDetails = () => {
                                             <div className="p-2 w-100 fs-4 fw-bold text-secondary">On Bench</div>
                                             <div className="p-2 fs-1 fw-bold text-secondary flex-shrink-2">0{unassignedprojectlist.length}</div>
                                         </div>
-                                        {/* <div className="d-flex">
-                                            <div className="p-2 w-100"><img src={Upcomingleave} alt='Upcomingleave' /></div>
-                                            <div className="p-2 fs-6 fw-bold flex-shrink-1">People on leave Upcoming 7 days</div>
-                                        </div> */}
                                     </div>
                                 </div>
                             </div>
@@ -99,7 +86,7 @@ const ProjectDetails = () => {
                                     </thead>
                                     {assignedproject ? (
                                         <tbody>
-                                            {todayRecords.map((item) => {
+                                            {assignedRecords.map((item) => {
                                                 return (
                                                     <tr>
                                                         <td style={{ textTransform: "capitalize" }}>{item.name}</td>
@@ -116,15 +103,12 @@ const ProjectDetails = () => {
 
                                     {unassignedproject ? (
                                         <tbody>
-                                            {upcomingRecords.map((item) => {
+                                            {unassignedRecords.map((item) => {
                                                 return (
                                                     <tr>
-
                                                         <td style={{ textTransform: "capitalize" }}>{item.name}</td>
                                                         <td className='vertical-row-color'>|</td>
-                                                        <td>{item.assignedProject === null ? "No Project Assigned": null}</td>
-                                                        
-                                                        
+                                                        <td>{item.assignedProject === null ? "No Project Assigned": null}</td>    
                                                     </tr>
                                                 )
                                             })}
@@ -135,12 +119,12 @@ const ProjectDetails = () => {
                                     
                                 </table>
 
-                                {assignedproject && todayRecords.length === 0 ?
+                                {assignedproject && assignedRecords.length === 0 ?
                                     <div className='text-center'>
                                         <img src={NoRecord} alt='NoRecord' className='w-10' />
                                     </div>
                                     : null}
-                                {unassignedproject && upcomingRecords.length === 0 ?
+                                {unassignedproject && unassignedRecords.length === 0 ?
                                     <div className='text-center'>
                                         <img src={NoRecord} alt='NoRecord' className='w-10' />
                                     </div>
@@ -151,14 +135,14 @@ const ProjectDetails = () => {
                     </div>
                 </div>
 
-                {assignedproject && todayRecords.length > 0 ?
+                {assignedproject && assignedRecords.length > 0 ?
                     <div className='d-flex'>
                         <div className="p-2 w-100 fs-6 fw-bold text-secondary">
-                            Displaying {currentPage} to {todayRecords.length}  of {todayRecords.length} records
+                        Showing {indexOfFirstRecord+1} to {currentPage === assignedPages ? assignedprojectlist.length: indexOfLastRecord}  of {assignedprojectlist.length} records
                         </div>
                         <div className="p-2 flex-shrink-1">
                             <Pagination
-                                nPages={todayPages}
+                                nPages={assignedPages}
                                 currentPage={currentPage}
                                 setCurrentPage={setCurrentPage}
                             /></div>
@@ -166,14 +150,14 @@ const ProjectDetails = () => {
                     </div>
                     : null}
 
-                {unassignedproject && upcomingRecords.length > 0 ?
+                {unassignedproject && unassignedRecords.length > 0 ?
                     <div className='d-flex'>
                         <div className="p-2 w-100 fs-6 fw-bold text-secondary">
-                            Displaying {currentPage} to {upcomingRecords.length}  of {upcomingRecords.length} records
+                        Showing {indexOfFirstRecord+1} to {currentPage === unassignedPages ? unassignedprojectlist.length: indexOfLastRecord}  of {unassignedprojectlist.length} records
                         </div>
                         <div className="p-2 flex-shrink-1">
                             <Pagination
-                                nPages={upcomingPages}
+                                nPages={unassignedPages}
                                 currentPage={currentPage}
                                 setCurrentPage={setCurrentPage}
                             /></div>
