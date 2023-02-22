@@ -258,7 +258,7 @@ const Dashboard = () => {
                 {todayleave && todayRecords.length > 0 && leavedetails ?
                     <div className='d-flex'>
                         <div className="p-2 w-100 fs-6 fw-bold text-secondary">
-                            Displaying {currentPage} to {todayRecords.length}  of {todayRecords.length} records
+                        Showing {indexOfFirstRecord+1} to {currentPage === todayPages ? todayleavelist.length: indexOfLastRecord}  of {todayleavelist.length} records
                         </div>
                         <div className="p-2 flex-shrink-1">
                             <Pagination
@@ -273,7 +273,7 @@ const Dashboard = () => {
                 {laterleave && upcomingRecords.length > 0 && leavedetails ?
                     <div className='d-flex'>
                         <div className="p-2 w-100 fs-6 fw-bold text-secondary">
-                            Displaying {currentPage} to {upcomingRecords.length}  of {upcomingRecords.length} records
+                        Showing {indexOfFirstRecord+1} to {currentPage === upcomingPages ? laterleavelist.length: indexOfLastRecord}  of {laterleavelist.length} records
                         </div>
                         <div className="p-2 flex-shrink-1">
                             <Pagination
@@ -288,7 +288,7 @@ const Dashboard = () => {
                 {leavestatus && pendingRecords.length > 0 && leavedetails ?
                     <div className='d-flex'>
                         <div className="p-2 w-100 fs-6 fw-bold text-secondary">
-                            Displaying {currentPage} to {pendingRecords.length}  of {upcomingRecords.length} records
+                        Showing {indexOfFirstRecord+1} to {currentPage === pendingPages ? leavestatuslist.length: indexOfLastRecord}  of {leavestatuslist.length} records
                         </div>
                         <div className="p-2 flex-shrink-1">
                             <Pagination
