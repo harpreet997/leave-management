@@ -28,7 +28,7 @@ const AddProject = () => {
                 window.location.reload(false)
             })
             .catch((error) => {
-                console.log(error);
+                alert(error.response.data.message);
             })
     }
 

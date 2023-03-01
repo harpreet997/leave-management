@@ -3,6 +3,7 @@ import { Button, Modal } from "react-bootstrap";
 import { addEmployee } from "../../postdata/postdata";
 import { getProjects } from "../../getdata/getdata";
 import { headers } from "../../header";
+import Multiselect from "multiselect-react-dropdown";
 
 const AddEmployee = () => {
     const [addemployee, setAddEmployee] = useState({
@@ -12,7 +13,16 @@ const AddEmployee = () => {
     })
     const [projectlist, setProjectList] = useState([]);
 
+    const [projectname, setProjectName] = useState([]);
 
+    console.log(projectname)
+    const options = projectlist.map((item) => {
+        return item.name
+    })
+
+    console.log(options);
+
+    console.log(projectlist)
     useEffect(() => {
         getProjects(headers)
             .then((response) => {
@@ -42,7 +52,7 @@ const AddEmployee = () => {
                 window.location.reload(false)
             })
             .catch((error) => {
-                console.log(error);
+                alert(error.response.data.message);
             })
         }
         else{
@@ -52,7 +62,7 @@ const AddEmployee = () => {
                 window.location.reload(false)
             })
             .catch((error) => {
-                console.log(error);
+                alert(error.response.data.message);
             })
     }}
 
@@ -92,6 +102,18 @@ const AddEmployee = () => {
 
                         </select>
                     </div>
+                    {/* <Multiselect
+                    
+                    isObject = {false}
+                    options = {options}
+                    onSelect = {(event) => {
+                        setProjectName(event)
+                    console.log(projectname)}}
+                    onRemove = {(event) => {
+                        setProjectName(event)
+                    console.log(projectname)}}
+                    showCheckbox
+                    /> */}
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>

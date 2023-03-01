@@ -69,7 +69,7 @@ const ApplyLeave = () => {
                             </div>
                             <div className="mb-3">
                                 <p className="text-start">Reason of Leave</p>
-                                <textarea className="form-control" id="reason" name="reason" rows="3" onChange={handleChange}></textarea>
+                                <textarea className="form-control" id="reason" name="reason" rows="3" onChange={handleChange} required></textarea>
                             </div>
                             <div className='text-start'>
                                 <button className='btn btn-primary apply-leave-button' type='submit'><p className='fs-4'>Apply Leave</p></button>

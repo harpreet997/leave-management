@@ -47,7 +47,7 @@ const EditEmployee = ({ data, id, project, projectid }) => {
                     window.location.reload(false)
                 })
                 .catch((error) => {
-                    console.log(error);
+                    alert(error.response.data.message);
                 })
         }
         else if(projectName === "Bench"){
@@ -62,7 +62,7 @@ const EditEmployee = ({ data, id, project, projectid }) => {
                     window.location.reload(false)
                 })
                 .catch((error) => {
-                    console.log(error);
+                    alert(error.response.data.message);
                 })
         }
         else {
@@ -77,7 +77,7 @@ const EditEmployee = ({ data, id, project, projectid }) => {
                     window.location.reload(false)
                 })
                 .catch((error) => {
-                    console.log(error);
+                    alert(error.response.data.message);
                 })
         }
     }
