@@ -4,7 +4,7 @@ import { editEmployee } from "../../postdata/postdata";
 import { getProjects } from "../../getdata/getdata";
 import { headers } from "../../header";
 
-const EditEmployee = ({ data, id, project, projectid }) => {
+const EditEmployee = ({ data, id, project, projectid, handleEditClose }) => {
     const [editemployee, setEditEmployee] = useState({
         name: data.name,
         email: data.email,
@@ -44,7 +44,7 @@ const EditEmployee = ({ data, id, project, projectid }) => {
             editEmployee(id, data, headers)
                 .then((response) => {
                     alert(response.data.message)
-                    window.location.reload(false)
+                    handleEditClose();
                 })
                 .catch((error) => {
                     alert(error.response.data.message);
@@ -80,10 +80,6 @@ const EditEmployee = ({ data, id, project, projectid }) => {
                     alert(error.response.data.message);
                 })
         }
-    }
-
-    const handleClose = () => {
-        window.location.reload(false);
     }
 
     return (
@@ -125,7 +121,7 @@ const EditEmployee = ({ data, id, project, projectid }) => {
                     </div>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
+                    <Button variant="secondary" onClick={handleEditClose}>
                         Cancel
                     </Button>
                     <Button type="submit" variant="primary">

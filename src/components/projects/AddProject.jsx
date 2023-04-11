@@ -3,7 +3,7 @@ import { Button, Modal } from "react-bootstrap";
 import { addProject } from "../../postdata/postdata";
 import { headers } from "../../header";
 
-const AddProject = () => {
+const AddProject = ({handleClose}) => {
     const [addproject, setAddProject] = useState({
         name: "",
         startAt: "",
@@ -25,15 +25,11 @@ const AddProject = () => {
         addProject(addproject, headers)
             .then((response) => {
                 alert(response.data.message)
-                window.location.reload(false)
+                handleClose();
             })
             .catch((error) => {
                 alert(error.response.data.message);
             })
-    }
-
-    const handleClose = () => {
-        window.location.reload(false);
     }
 
     return (

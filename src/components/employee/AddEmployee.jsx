@@ -5,7 +5,7 @@ import { getProjects } from "../../getdata/getdata";
 import { headers } from "../../header";
 import Multiselect from "multiselect-react-dropdown";
 
-const AddEmployee = () => {
+const AddEmployee = ({handleClose}) => {
     const [addemployee, setAddEmployee] = useState({
         employeeName: "",
         email: "",
@@ -15,18 +15,13 @@ const AddEmployee = () => {
 
     const [projectname, setProjectName] = useState([]);
 
-    console.log(projectname)
     const options = projectlist.map((item) => {
         return item.name
     })
 
-    console.log(options);
-
-    console.log(projectlist)
     useEffect(() => {
         getProjects(headers)
             .then((response) => {
-                console.log(response.data.data.name)
                 setProjectList(response.data.data);
             })
             .catch((error) => {
@@ -49,7 +44,7 @@ const AddEmployee = () => {
             addEmployee(addemployee, headers)
             .then((response) => {
                 alert(response.data.message)
-                window.location.reload(false)
+                handleClose();
             })
             .catch((error) => {
                 alert(error.response.data.message);
@@ -65,10 +60,6 @@ const AddEmployee = () => {
                 alert(error.response.data.message);
             })
     }}
-
-    const handleClose = () => {
-        window.location.reload(false);
-    }
 
     return (
         <>

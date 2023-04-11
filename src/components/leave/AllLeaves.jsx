@@ -191,7 +191,7 @@ const AllLeaves = () => {
                                                                 DeleteLeaves(item._id);
                                                             }} /></td>
                                                     <Modal show={editstatus === item._id ? true : false} onHide={handleClose}>
-                                                        <EditLeave leavelist={item} />
+                                                        <EditLeave leavelist={item} handleClose={handleClose}/>
                                                     </Modal>
                                                 </tr>
                                             )

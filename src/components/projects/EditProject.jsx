@@ -3,7 +3,7 @@ import { Button, Modal } from "react-bootstrap";
 import { editProject } from "../../postdata/postdata";
 import { headers } from "../../header";
 
-const EditProject = ({data, id}) => {
+const EditProject = ({data, id, handleEditClose}) => {
     const [editproject, setEditEmployee] = useState({
         name: data.name,
         startAt: data.startAt.substring(0, 10),
@@ -26,17 +26,13 @@ const EditProject = ({data, id}) => {
         editProject(id, editproject, headers)
         .then((response) => {
             alert(response.data.message)
-            window.location.reload(false)
+            handleEditClose();
         })
         .catch((error) => {
             alert(error.response.data.message);
         })
     }
 
-    const handleClose = () => {
-        window.location.reload(false);
-    }
-    
     return (
         <>
             <Modal.Header closeButton>
@@ -78,7 +74,7 @@ const EditProject = ({data, id}) => {
                     </div>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
+                    <Button variant="secondary" onClick={handleEditClose}>
                         Cancel
                     </Button>
                     <Button type="submit" variant="primary">

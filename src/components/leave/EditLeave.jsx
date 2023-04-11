@@ -3,7 +3,7 @@ import { Modal, Button } from "react-bootstrap";
 import { editLeave } from "../../postdata/postdata";
 import '../../styles/dashboard.css';
 
-const EditLeave = ({ leavelist }) => {
+const EditLeave = ({ leavelist, handleClose }) => {
     const [editleavedata, setEditLeavedata] = useState({
         employeeName: leavelist.employeeName,
         reason: leavelist.reason,
@@ -21,16 +21,12 @@ const EditLeave = ({ leavelist }) => {
         })
     }
 
-    const handleClose = () => {
-        window.location.reload(false);
-    }
-
     const UpdateStatus = (event) => {
         event.preventDefault();
         editLeave(editleavedata._id, editleavedata)
             .then((response) => {
                 alert(response.data.message);
-                window.location.reload(false);
+                handleClose();
             })
             .catch((error) => {
                 console.log(error);
@@ -45,7 +41,7 @@ const EditLeave = ({ leavelist }) => {
                 <Modal.Body>
                     <div className="mb-3">
                         <p className="text-start">Employee Name</p>
-                        <input type="email" className="text-capitalize form-control w-100" id="employeeName" name="employeeName" 
+                        <input type="email" className="text-capitalize form-control w-100" id="employeeName" name="employeeName"
                             value={editleavedata.employeeName} readOnly />
                     </div>
                     <div className="mb-3">

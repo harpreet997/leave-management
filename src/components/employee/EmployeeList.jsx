@@ -98,7 +98,7 @@ const EmployeeList = () => {
                                 <button className='btn btn-primary' onClick={AddEmployeeModal}>Add Employee</button>
                             </div>
                             <Modal show={addemployee} onHide={handleClose}>
-                                <AddEmployee />
+                                <AddEmployee handleClose={handleClose}/>
                             </Modal>
                         </div>
 
@@ -135,7 +135,8 @@ const EmployeeList = () => {
                                                                     DeleteEmployee(item._id);
                                                                 }} /></td>
                                                         <Modal show={editemployee === item._id ? true : false} onHide={handleEditClose}>
-                                                            <EditEmployee data={item} id={item._id} project={projectname} projectid={projectid}/>
+                                                            <EditEmployee data={item} id={item._id} project={projectname} 
+                                                            projectid={projectid} handleEditClose={handleEditClose}/>
                                                         </Modal>
                                                     </tr>
                                                 )
